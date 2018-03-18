@@ -14,4 +14,8 @@ const getArticleById = articleId => {
   });
 };
 
-export { getAllArticles, getArticleById };
+const getTopics = () => {
+  return fetch(`${API_URL}/topics`).then(res => res.json());
+};
+
+export { getAllArticles, getArticleById, getTopics };
