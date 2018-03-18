@@ -5,8 +5,8 @@ class ArticlePage extends Component {
   state = { article: {} };
 
   componentDidMount() {
-    getArticleById(this.props.match.params.articleId).then(article =>
-      this.setState((article: article))
+    getArticleById(this.props.match.params.articleId).then(res =>
+      this.setState({ article: res.article })
     );
   }
 
