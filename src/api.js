@@ -22,4 +22,8 @@ const getCommentsByArticle = articleId => {
   return fetch(`${API_URL}/articles/${articleId}/comments`).then(res => res.json());
 };
 
-export { getAllArticles, getArticleById, getTopics, getCommentsByArticle };
+const getUser = userName => {
+  return fetch(`${API_URL}/users/${userName}`).then(res => res.json());
+};
+
+export { getAllArticles, getArticleById, getTopics, getCommentsByArticle, getUser };
