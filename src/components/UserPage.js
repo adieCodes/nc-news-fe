@@ -1,5 +1,9 @@
 import React from 'react';
 
-const UserPage = () => <h1>User Page</h1>;
+const UserPage = props => (
+  <div className="userPage">
+    <h1>{props.user.name}</h1>
+  </div>
+);
 
 export default UserPage;

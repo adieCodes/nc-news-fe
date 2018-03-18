@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
-import { getTopics } from '../api';
+import React from 'react';
+import NavItem from './NavItem';
 
-class Nav extends Component {
-  state = { topics: [] };
-
-  componentDidMount() {
-    getTopics().then(res => this.setState({ topics: res.topics }));
-  }
-
-  render() {
-    return <h1>Nav</h1>;
-  }
-}
+const Nav = props => (
+  <div className="nav">{props.topics.map(topic => <NavItem key={topic._id}>{topic}</NavItem>)}</div>
+);
 
 export default Nav;

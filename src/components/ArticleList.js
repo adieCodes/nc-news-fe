@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
-import { getAllArticles } from '../api';
+import React from 'react';
+import ArticleCard from './ArticleCard';
 
-class ArticleList extends Component {
-  state = { articles: [] };
-
-  componentDidMount() {
-    const topicRequest = !this.props.match.params.topicId ? '' : this.props.match.params.topicId;
-    getAllArticles(topicRequest).then(res => this.setState({ articles: res.articles }));
-  }
-
-  render() {
-    return <h1>Article List</h1>;
-  }
-}
+const ArticleList = props => {
+  return (
+    <div className="articleList">
+      <h1>Article List</h1>
+      {props.articles.map(article => <ArticleCard article={article} key={article._id} />)}
+    </div>
+  );
+};
 
 export default ArticleList;
