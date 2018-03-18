@@ -8,4 +8,10 @@ const getAllArticles = (topic = '') => {
   });
 };
 
-export { getAllArticles };
+const getArticleById = articleId => {
+  return fetch(`${API_URL}/articles/${articleId}`).then(res => {
+    return res.json();
+  });
+};
+
+export { getAllArticles, getArticleById };
