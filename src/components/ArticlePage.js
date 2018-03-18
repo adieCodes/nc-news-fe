@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import { getArticleById } from '../api';
+import { getArticleById, getCommentsByArticle } from '../api';
 
 class ArticlePage extends Component {
-  state = { article: {} };
+  state = { article: {}, comments: [] };
 
   componentDidMount() {
     const articleId = this.props.match.params.articleId;
     getArticleById(articleId).then(res => this.setState({ article: res.article }));
+    getCommentsByArticle(articleId).then(res => this.setState({ comments: res.comments }));
   }
 
   render() {
-    return <h1>Article Page</h1>;
+    return (
+      <div>
+        <h1>Article Page</h1>
+      </div>
+    );
   }
 }
 

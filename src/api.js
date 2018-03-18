@@ -18,4 +18,8 @@ const getTopics = () => {
   return fetch(`${API_URL}/topics`).then(res => res.json());
 };
 
-export { getAllArticles, getArticleById, getTopics };
+const getCommentsByArticle = articleId => {
+  return fetch(`${API_URL}/articles/${articleId}/comments`).then(res => res.json());
+};
+
+export { getAllArticles, getArticleById, getTopics, getCommentsByArticle };
