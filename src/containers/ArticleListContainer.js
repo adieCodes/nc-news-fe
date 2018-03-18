@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { getAllArticles } from '../api';
-import { ArticleList } from '../components/ArticleList';
+import ArticleList from '../components/ArticleList';
 
-class ArticleList extends Component {
+class ArticleListContainer extends Component {
   state = { articles: [] };
 
   componentDidMount() {
@@ -11,8 +11,8 @@ class ArticleList extends Component {
   }
 
   render() {
-    return <ArticleList />;
+    return <ArticleList articles={this.state.articles} />;
   }
 }
 
-export default ArticleList;
+export default ArticleListContainer;
