@@ -12,7 +12,7 @@ class ArticlePageContainer extends Component {
   }
 
   render() {
-    return <ArticlePage article={this.state.article} />;
+    return <ArticlePage article={this.state.article} comments={this.state.comments} />;
   }
 }
 

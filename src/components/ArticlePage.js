@@ -2,6 +2,8 @@ import React from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import CommentCard from './CommentCard';
+
 const ArticlePage = props => {
   return (
     <div className="articlePage">
@@ -14,12 +16,14 @@ const ArticlePage = props => {
         <Link to={'#'}>Down</Link>
       </div>
       <article className="article">{props.article.body}</article>
+      {props.comments.map(comment => <CommentCard comment={comment} />)}
     </div>
   );
 };
 
 ArticlePage.propTypes = {
-  article: PT.object.isRequired
+  article: PT.object.isRequired,
+  comments: PT.array.isRequired
 };
 
 export default ArticlePage;
