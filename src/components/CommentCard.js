@@ -1,6 +1,7 @@
 import React from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
+import { unixTimeStampToString } from '../helpers/timeHelpers';
 
 const CommentCard = props => {
   return (
@@ -9,7 +10,7 @@ const CommentCard = props => {
       <p>
         <Link to={`/users/${props.comment.created_by}`}>{props.comment.created_by}</Link>
       </p>
-      <p>{props.comment.created_at}</p>
+      <p>{unixTimeStampToString(props.comment.created_at)}</p>
       <div class="article-card__voting-buttons">
         <Link to={'#'}>Up</Link>
         <span>{props.comment.votes}</span>
