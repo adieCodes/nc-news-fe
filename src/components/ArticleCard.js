@@ -12,7 +12,7 @@ const ArticleCard = props => {
       </h2>
       <Link to={`/topics/${props.article.belongs_to}`}>{props.article.belongs_to}</Link>
       <Link to={`/users/${props.article.created_by}`}>{props.article.created_by}</Link>
-      <div class="article-card__voting-buttons">
+      <div className="article-card__voting-buttons">
         <Link to={'#'}>Up</Link>
         <span>{props.article.votes}</span>
         <Link to={'#'}>Down</Link>
