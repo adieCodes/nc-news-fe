@@ -33,7 +33,7 @@ class ArticlePage extends Component {
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
         <article className="article">{this.props.article.body}</article>
-        {this.props.comments.map(comment => <CommentCard comment={comment} />)}
+        {this.props.comments.map(comment => <CommentCard comment={comment} key={comment._id} />)}
       </div>
     );
   }
