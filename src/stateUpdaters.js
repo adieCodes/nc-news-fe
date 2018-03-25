@@ -1,6 +1,13 @@
 const articleVote = (articles, articleId, voteType) => {
   if (!/^down$|^up$/.test(voteType)) return articles.slice(0);
   const voteValue = voteType === 'up' ? 1 : -1;
+
+  const singleArticle = !Array.isArray(articles);
+
+  if (singleArticle) {
+    return Object.assign({}, articles, { votes: articles.votes + voteValue });
+  }
+
   return articles.map(article => {
     if (article._id === articleId) {
       return Object.assign({}, article, { votes: article.votes + voteValue });
