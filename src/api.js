@@ -31,11 +31,18 @@ const updateArticleVote = (articleId, voteType) => {
   );
 };
 
+const updateCommentVote = (commentId, voteType) => {
+  return fetch(`${API_URL}/comments/${commentId}?vote=${voteType}`, { method: 'PUT' }).then(res =>
+    res.json()
+  );
+};
+
 export {
   getAllArticles,
   getArticleById,
   getTopics,
   getCommentsByArticle,
   getUser,
-  updateArticleVote
+  updateArticleVote,
+  updateCommentVote
 };
