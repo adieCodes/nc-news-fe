@@ -13,7 +13,8 @@ const ArticleList = props => {
 };
 
 ArticleList.propTypes = {
-  articles: PT.array.isRequired
+  articles: PT.array.isRequired,
+  handleVote: PT.func.isRequired
 };
 
 export default ArticleList;

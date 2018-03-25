@@ -64,7 +64,8 @@ class ArticleCard extends Component {
 }
 
 ArticleCard.propTypes = {
-  article: PT.object.isRequired
+  article: PT.object.isRequired,
+  handleVote: PT.func.isRequired
 };
 
 export default ArticleCard;
