@@ -31,8 +31,15 @@ class ArticleListContainer extends Component {
     if (newUrl !== existingUrl) this.fetchArticles(topicRequest);
   }
 
+  handleVote = (articleId, voteType) => {
+    const { articles } = this.state;
+    const newArticles = articleVote(articles, articleId, voteType);
+    console.log('newArticles', newArticles);
+    this.setState({ articles: newArticles });
+  };
+
   render() {
-    return <ArticleList articles={this.state.articles} />;
+    return <ArticleList articles={this.state.articles} handleVote={this.handleVote} />;
   }
 }
 
