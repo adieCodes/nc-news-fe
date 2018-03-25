@@ -8,4 +8,17 @@ const articleVote = (articles, articleId, voteType) => {
   });
 };
 
-export { articleVote };
+const limitVote = (state, voteType) => {
+  const newVoteValue = voteType === 'up' ? 1 : -1;
+  const newVoteCount = state.voteChangedBy + newVoteValue;
+  const blockVotingUp = newVoteCount > 0;
+  const blockVotingDown = newVoteCount < 0;
+
+  return Object.assign({}, state, {
+    voteChangedBy: newVoteCount,
+    voteUpDisabled: blockVotingUp,
+    voteDownDisabled: blockVotingDown
+  });
+};
+
+export { articleVote, limitVote };

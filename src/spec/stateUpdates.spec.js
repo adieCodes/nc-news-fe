@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { articleVote } from '../stateUpdaters';
+import { articleVote, limitVote } from '../stateUpdaters';
 
 describe('#StateUpdaters', () => {
   describe('#articleVote', () => {
@@ -1485,6 +1485,21 @@ describe('#StateUpdaters', () => {
       expect(actual[originalArticles.length - 1].votes).to.equal(
         originalArticles[originalArticles.length - 1].votes
       );
+    });
+  });
+  describe('#limitVote', () => {
+    it('increments vote and blocks voting up again', () => {
+      const originalState = {
+        voteChangedBy: 0,
+        voteUpDisabled: false,
+        voteDownDisabled: false
+      };
+      const voteType = 'up';
+      const actual = limitVote(originalState, voteType);
+
+      expect(actual.voteChangedBy).to.equal(1);
+      expect(actual.voteUpDisabled).to.equal(true);
+      expect(actual.voteDownDisabled).to.equal(false);
     });
   });
 });
