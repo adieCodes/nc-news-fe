@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 import VoteButton from './VoteButton';
+import { limitVote } from '../stateUpdaters';
 
 class ArticleCard extends Component {
   state = {
@@ -12,17 +13,9 @@ class ArticleCard extends Component {
 
   vote = (event, voteType) => {
     const articleId = this.props.article._id;
-    const newVoteValue = voteType === 'up' ? 1 : -1;
-    const newVoteCount = this.state.voteChangedBy + newVoteValue;
-    const blockVotingUp = newVoteCount > 0;
-    const blockVotingDown = newVoteCount < 0;
+    const newState = limitVote(this.state, voteType);
 
-    event.preventDefault();
-    this.setState({
-      voteChangedBy: newVoteCount,
-      voteUpDisabled: blockVotingUp,
-      voteDownDisabled: blockVotingDown
-    });
+    this.setState(newState);
     return this.props.handleVote(articleId, voteType);
   };
 
