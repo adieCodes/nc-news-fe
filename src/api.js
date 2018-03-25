@@ -1,5 +1,4 @@
-import config from './config';
-const API_URL = config.API_URL.dev;
+const API_URL = process.env.REACT_APP_API_URL;
 
 const getAllArticles = (topic = '') => {
   const reqUrl = topic === '' ? `${API_URL}/articles` : `${API_URL}/topics/${topic}/articles`;
