@@ -405,6 +405,22 @@ describe('#StateUpdaters', () => {
 
       expect(actual.votes).to.equal(originalArticle.votes - 1);
     });
+    it('does not mutate state when voting on single article object', () => {
+      const originalArticle = {
+        _id: '5aa01a0ad82b0c94600c3d05',
+        belongs_to: 'cooking',
+        body:
+          'Thanksgiving is a foodie’s favorite holiday. Mashed potatoes, cranberry sauce, stuffing, and last but not least, a juicy turkey. Don’t let your meticulous menu fall short of perfection; flavorful cock…',
+        created_by: 'grumpy19',
+        title: 'Thanksgiving Drinks for Everyone',
+        votes: 11
+      };
+      const articleId = originalArticle._id;
+      const voteType = 'down';
+      const actual = articleVote(originalArticle, articleId, voteType);
+
+      expect(actual).to.not.equal(originalArticle.votes - 1);
+    });
     it('increments vote on single article when passed array of articles', () => {
       const originalArticles = [
         {
