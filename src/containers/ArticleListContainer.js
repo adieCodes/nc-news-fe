@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getAllArticles } from '../api';
 import ArticleList from '../components/ArticleList';
+import { articleVote } from '../stateUpdaters';
 
 class ArticleListContainer extends Component {
   state = { articles: [], location: '' };
@@ -12,13 +13,22 @@ class ArticleListContainer extends Component {
   }
 
   componentDidMount() {
-    const topicRequest = !this.props.match.params.topicId ? '' : this.props.match.params.topicId;
+    const newTopicId = this.props.match.params.topicId;
+    const requestAllArticles = !newTopicId;
+    const topicRequest = requestAllArticles ? '' : newTopicId;
+
     this.fetchArticles(topicRequest);
   }
 
   componentWillReceiveProps(nextProps) {
-    const topicRequest = !nextProps.match.params.topicId ? '' : nextProps.match.params.topicId;
-    if (nextProps.location.pathname !== this.props.location) this.fetchArticles(topicRequest);
+    const newUrl = nextProps.location.pathname;
+    const existingUrl = this.props.location;
+    const newTopicId = nextProps.match.params.topicId;
+    const requestAllArticles = !newTopicId;
+
+    const topicRequest = requestAllArticles ? '' : newTopicId;
+
+    if (newUrl !== existingUrl) this.fetchArticles(topicRequest);
   }
 
   render() {
