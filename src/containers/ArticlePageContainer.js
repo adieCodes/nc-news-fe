@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { getArticleById, getCommentsByArticle } from '../api';
+import { getArticleById, getCommentsByArticle, updateArticleVote } from '../api';
 import ArticlePage from '../components/ArticlePage';
+
+import { articleVote } from '../stateUpdaters';
 
 class ArticlePageContainer extends Component {
   state = { article: {}, comments: [] };
@@ -11,8 +13,22 @@ class ArticlePageContainer extends Component {
     getCommentsByArticle(articleId).then(res => this.setState({ comments: res.comments }));
   }
 
+  handleVote = (articleId, voteType) => {
+    const { article } = this.state;
+    const newArticles = articleVote(article, articleId, voteType);
+
+    this.setState({ article: newArticles });
+    updateArticleVote(articleId, voteType);
+  };
+
   render() {
-    return <ArticlePage article={this.state.article} comments={this.state.comments} />;
+    return (
+      <ArticlePage
+        article={this.state.article}
+        comments={this.state.comments}
+        handleVote={this.handleVote}
+      />
+    );
   }
 }
 

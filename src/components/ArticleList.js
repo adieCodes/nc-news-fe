@@ -5,13 +5,16 @@ import PT from 'prop-types';
 const ArticleList = props => {
   return (
     <div className="articleList">
-      {props.articles.map(article => <ArticleCard article={article} key={article._id} />)}
+      {props.articles.map(article => (
+        <ArticleCard article={article} key={article._id} handleVote={props.handleVote} />
+      ))}
     </div>
   );
 };
 
 ArticleList.propTypes = {
-  articles: PT.array.isRequired
+  articles: PT.array.isRequired,
+  handleVote: PT.func.isRequired
 };
 
 export default ArticleList;

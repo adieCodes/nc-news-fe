@@ -1,28 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
+import VoteButton from './VoteButton';
+import { limitVote } from '../stateUpdaters';
 
-const ArticleCard = props => {
-  return (
-    <div className="article-card">
-      <h2>
-        <Link to={`/topics/${props.article.belongs_to}/${props.article._id}`}>
-          {props.article.title}
-        </Link>
-      </h2>
-      <Link to={`/topics/${props.article.belongs_to}`}>{props.article.belongs_to}</Link>
-      <Link to={`/users/${props.article.created_by}`}>{props.article.created_by}</Link>
-      <div className="article-card__voting-buttons">
-        <Link to={'#'}>Up</Link>
-        <span>{props.article.votes}</span>
-        <Link to={'#'}>Down</Link>
+class ArticleCard extends Component {
+  state = {
+    voteChangedBy: 0,
+    voteUpDisabled: false,
+    voteDownDisabled: false
+  };
+
+  vote = (event, voteType) => {
+    const articleId = this.props.article._id;
+    const newState = limitVote(this.state, voteType);
+
+    this.setState(newState);
+    return this.props.handleVote(articleId, voteType);
+  };
+
+  render() {
+    return (
+      <div className="article-card">
+        <h2>
+          <Link to={`/topics/${this.props.article.belongs_to}/${this.props.article._id}`}>
+            {this.props.article.title}
+          </Link>
+        </h2>
+        <Link to={`/topics/${this.props.article.belongs_to}`}>{this.props.article.belongs_to}</Link>
+        <Link to={`/users/${this.props.article.created_by}`}>{this.props.article.created_by}</Link>
+        <div className="article-card__voting-buttons">
+          <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
+          <span>{this.props.article.votes}</span>
+          <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 ArticleCard.propTypes = {
-  article: PT.object.isRequired
+  article: PT.object.isRequired,
+  handleVote: PT.func.isRequired
 };
 
 export default ArticleCard;

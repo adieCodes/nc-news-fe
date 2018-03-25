@@ -1,27 +1,46 @@
 import React, { Component } from 'react';
-import { getAllArticles } from '../api';
+import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
+import { articleVote } from '../stateUpdaters';
 
 class ArticleListContainer extends Component {
   state = { articles: [], location: '' };
 
-  fetchArticles() {
-    const topicRequest = !this.props.match.params.topicId ? '' : this.props.match.params.topicId;
+  fetchArticles(topicRequest) {
     getAllArticles(topicRequest).then(res =>
       this.setState({ articles: res.articles, location: this.props.location })
     );
   }
 
   componentDidMount() {
-    this.fetchArticles();
+    const newTopicId = this.props.match.params.topicId;
+    const requestAllArticles = !newTopicId;
+    const topicRequest = requestAllArticles ? '' : newTopicId;
+
+    this.fetchArticles(topicRequest);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.location !== this.props.location) this.fetchArticles();
+  componentWillReceiveProps(nextProps) {
+    const newUrl = nextProps.location.pathname;
+    const existingUrl = this.props.location;
+    const newTopicId = nextProps.match.params.topicId;
+    const requestAllArticles = !newTopicId;
+
+    const topicRequest = requestAllArticles ? '' : newTopicId;
+
+    if (newUrl !== existingUrl) this.fetchArticles(topicRequest);
   }
+
+  handleVote = (articleId, voteType) => {
+    const { articles } = this.state;
+    const newArticles = articleVote(articles, articleId, voteType);
+
+    this.setState({ articles: newArticles });
+    updateArticleVote(articleId, voteType);
+  };
 
   render() {
-    return <ArticleList articles={this.state.articles} />;
+    return <ArticleList articles={this.state.articles} handleVote={this.handleVote} />;
   }
 }
 
