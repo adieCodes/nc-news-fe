@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { getArticleById, getCommentsByArticle, updateArticleVote } from '../api';
+import { getArticleById, getCommentsByArticle, updateArticleVote, updateCommentVote } from '../api';
 import ArticlePage from '../components/ArticlePage';
 
-import { articleVote } from '../stateUpdaters';
+import { collectionVote } from '../stateUpdaters';
 
 class ArticlePageContainer extends Component {
   state = { article: {}, comments: [] };
@@ -13,12 +13,13 @@ class ArticlePageContainer extends Component {
     getCommentsByArticle(articleId).then(res => this.setState({ comments: res.comments }));
   }
 
-  handleVote = (articleId, voteType) => {
-    const { article } = this.state;
-    const newArticles = articleVote(article, articleId, voteType);
+  handleVote = (collection, id, voteType) => {
+    const subState = this.state[collection];
+    const newArticles = collectionVote(subState, id, voteType);
 
-    this.setState({ article: newArticles });
-    updateArticleVote(articleId, voteType);
+    this.setState({ [collection]: newArticles });
+    if (collection === 'article') updateArticleVote(id, voteType);
+    if (collection === 'comments') updateCommentVote(id, voteType);
   };
 
   render() {

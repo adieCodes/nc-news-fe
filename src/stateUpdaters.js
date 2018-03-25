@@ -1,17 +1,17 @@
-const articleVote = (articles, articleId, voteType) => {
-  if (!/^down$|^up$/.test(voteType)) return articles.slice(0);
+const collectionVote = (collection, id, voteType) => {
+  if (!/^down$|^up$/.test(voteType)) return collection.slice(0);
   const voteValue = voteType === 'up' ? 1 : -1;
 
-  const singleArticle = !Array.isArray(articles);
+  const singleArticle = !Array.isArray(collection);
 
   if (singleArticle) {
-    return Object.assign({}, articles, { votes: articles.votes + voteValue });
+    return Object.assign({}, collection, { votes: collection.votes + voteValue });
   }
 
-  return articles.map(article => {
-    if (article._id === articleId) {
-      return Object.assign({}, article, { votes: article.votes + voteValue });
-    } else return article;
+  return collection.map(item => {
+    if (item._id === id) {
+      return Object.assign({}, item, { votes: item.votes + voteValue });
+    } else return item;
   });
 };
 
@@ -34,4 +34,4 @@ const limitVote = (state, voteType) => {
   });
 };
 
-export { articleVote, limitVote };
+export { collectionVote, limitVote };

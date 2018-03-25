@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
-import { articleVote } from '../stateUpdaters';
+import { collectionVote } from '../stateUpdaters';
 
 class ArticleListContainer extends Component {
   state = { articles: [], location: '' };
@@ -33,7 +33,7 @@ class ArticleListContainer extends Component {
 
   handleVote = (articleId, voteType) => {
     const { articles } = this.state;
-    const newArticles = articleVote(articles, articleId, voteType);
+    const newArticles = collectionVote(articles, articleId, voteType);
 
     this.setState({ articles: newArticles });
     updateArticleVote(articleId, voteType);

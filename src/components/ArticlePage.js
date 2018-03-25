@@ -18,7 +18,7 @@ class ArticlePage extends Component {
     const newState = limitVote(this.state, voteType);
 
     this.setState(newState);
-    this.props.handleVote(articleId, voteType);
+    this.props.handleVote('article', articleId, voteType);
   };
 
   render() {
@@ -33,7 +33,9 @@ class ArticlePage extends Component {
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
         <article className="article">{this.props.article.body}</article>
-        {this.props.comments.map(comment => <CommentCard comment={comment} key={comment._id} />)}
+        {this.props.comments.map(comment => (
+          <CommentCard comment={comment} key={comment._id} handleVote={this.props.handleVote} />
+        ))}
       </div>
     );
   }
