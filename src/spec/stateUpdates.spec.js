@@ -1214,11 +1214,70 @@ describe('#StateUpdaters', () => {
           __v: 0
         }
       ];
-      const articleId = originalComments[0]._id;
+      const commentId = originalComments[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalComments, articleId, voteType);
+      const actual = collectionVote(originalComments, commentId, voteType);
 
       expect(actual[0].votes).to.equal(originalComments[0].votes + 1);
+    });
+    it('increments vote on single comment when passed an array of comments', () => {
+      const originalComments = [
+        {
+          created_at: 1519635587000,
+          votes: 10,
+          created_by: 'jessjelly',
+          _id: '5a9be3733dbab14a18aff475',
+          body:
+            'Ucuva fal bajonpur ber nijuho fudies lewevuza azigiciw ege vonub tunuab waoza wa. Cij fevgegco podahki koedter fec behepva se war ak maza ohhu wetcu pe. Uteugzet si le lafep rottu mo jegmutben romawgik tabow pesfem nuusva suvgoj ladah tut dipkebaw na. De ru izo dihi vah gofpesuh raibali nomgucgu lef haltecej fikufhu co dida huc eleosi waz mof.',
+          belongs_to: '5a9be3733dbab14a18aff42c',
+          __v: 0
+        },
+        {
+          created_at: 1519578287000,
+          votes: 10,
+          created_by: 'cooljmessy',
+          _id: '5a9be3733dbab14a18aff471',
+          body:
+            'Ze tucusacet bi es ekeam vamo govwired ijgi ego soul epo keb zonuvil co lek. Jalguwi urwo cavvigcot ezajekfu ageze opemog vic rusnivdi po fo gov omhegva vewwi napdod rurebi lasevme ola ozaba. Zew siclego gis ape witfuj je erore ubovef he obepelduh diohu na.',
+          belongs_to: '5a9be3733dbab14a18aff42c',
+          __v: 0
+        },
+        {
+          created_at: 1519916867000,
+          votes: 9,
+          created_by: 'happyamy2016',
+          _id: '5a9be3733dbab14a18aff476',
+          body:
+            'Te gavib ogva cotlebjot cone enu pigevi fedu fik vu it jijew wak rojigte wirgo. Obhoopo kedep fu avo dusir ja fe ceja gac nekuj vi lepzecu do. Gewsudek zompubiw wugep kali ra zo suzamovib ah gelej mahiraol ucupin utpekuf la leb paigdo. Zo ge pehanug afzik nejwotko bedal vugjug alpu netif oribo redaliuc ge or oz ruiceva ki.',
+          belongs_to: '5a9be3733dbab14a18aff42c',
+          __v: 0
+        },
+        {
+          created_at: 1519752167000,
+          votes: 8,
+          created_by: 'cooljmessy',
+          _id: '5a9be3733dbab14a18aff473',
+          body:
+            'Ibufucul ipuccim duvdoc rebguw dalobit cewu ebiamat jecoif dirugow deprutgof mutegud puvvisvu. Jahku irtod ude vejujki la rugu telmak linota nottu geduz rilha wopur ozpa bileza se. Niuban uksof inuohe elgov iwasamu adoweuz sitlel pafbufweg vunobid uda galowa civofi bez vosakkaz.',
+          belongs_to: '5a9be3733dbab14a18aff42c',
+          __v: 0
+        },
+        {
+          created_at: 1520028527000,
+          votes: 5,
+          created_by: 'jessjelly',
+          _id: '5a9be3733dbab14a18aff46f',
+          body:
+            'Icban avi cidmucu jewaptah wacihgoz ev fordi naje umhirli siz ga aforgop un ciomide focivwa pimfifso wizol gi. Rejoneba gut temekaez vu let vov mirsehu ajuto lo no uhfodeh wofuruwat.',
+          belongs_to: '5a9be3733dbab14a18aff42c',
+          __v: 0
+        }
+      ];
+      const commentId = originalComments[4]._id;
+      const voteType = 'down';
+      const actual = collectionVote(originalComments, commentId, voteType);
+
+      expect(actual[4].votes).to.equal(originalComments[4].votes - 1);
     });
     it("ignores non valid voteTypes and doesn't mutate state", () => {
       const originalArticles = [
