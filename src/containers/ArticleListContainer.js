@@ -34,7 +34,7 @@ class ArticleListContainer extends Component {
   handleVote = (articleId, voteType) => {
     const { articles } = this.state;
     const newArticles = articleVote(articles, articleId, voteType);
-    console.log('newArticles', newArticles);
+
     this.setState({ articles: newArticles });
   };
 
