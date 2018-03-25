@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllArticles } from '../api';
+import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
 import { articleVote } from '../stateUpdaters';
 
@@ -36,6 +36,7 @@ class ArticleListContainer extends Component {
     const newArticles = articleVote(articles, articleId, voteType);
 
     this.setState({ articles: newArticles });
+    updateArticleVote(articleId, voteType);
   };
 
   render() {

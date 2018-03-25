@@ -25,4 +25,17 @@ const getUser = userName => {
   return fetch(`${API_URL}/users/${userName}`).then(res => res.json());
 };
 
-export { getAllArticles, getArticleById, getTopics, getCommentsByArticle, getUser };
+const updateArticleVote = (articleId, voteType) => {
+  return fetch(`${API_URL}/articles/${articleId}?vote=${voteType}`, { method: 'PUT' }).then(res =>
+    res.json()
+  );
+};
+
+export {
+  getAllArticles,
+  getArticleById,
+  getTopics,
+  getCommentsByArticle,
+  getUser,
+  updateArticleVote
+};

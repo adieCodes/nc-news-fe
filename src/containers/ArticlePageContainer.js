@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getArticleById, getCommentsByArticle } from '../api';
+import { getArticleById, getCommentsByArticle, updateArticleVote } from '../api';
 import ArticlePage from '../components/ArticlePage';
 
 import { articleVote } from '../stateUpdaters';
@@ -18,6 +18,7 @@ class ArticlePageContainer extends Component {
     const newArticles = articleVote(article, articleId, voteType);
 
     this.setState({ article: newArticles });
+    updateArticleVote(articleId, voteType);
   };
 
   render() {
