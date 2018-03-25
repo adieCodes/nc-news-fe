@@ -373,7 +373,7 @@ describe('#StateUpdaters', () => {
 
       expect(actual).to.not.equal(originalArticles);
     });
-    it('increments vote on single article', () => {
+    it('increments vote on single article when passed array of articles', () => {
       const originalArticles = [
         {
           votes: 10,
@@ -743,7 +743,7 @@ describe('#StateUpdaters', () => {
 
       expect(actual[0].votes).to.equal(originalArticles[0].votes + 1);
     });
-    it('increments vote on single article', () => {
+    it('increments vote on single article when passed an array of articles', () => {
       const originalArticles = [
         {
           votes: 10,
