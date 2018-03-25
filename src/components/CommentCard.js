@@ -11,7 +11,7 @@ const CommentCard = props => {
         <Link to={`/users/${props.comment.created_by}`}>{props.comment.created_by}</Link>
       </p>
       <p>{unixTimeStampToString(props.comment.created_at)}</p>
-      <div class="article-card__voting-buttons">
+      <div className="article-card__voting-buttons">
         <Link to={'#'}>Up</Link>
         <span>{props.comment.votes}</span>
         <Link to={'#'}>Down</Link>
