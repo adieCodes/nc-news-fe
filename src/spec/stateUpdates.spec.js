@@ -1514,5 +1514,21 @@ describe('#StateUpdaters', () => {
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
     });
+    it("doesn't allow original vote state to be decremented twice in a row", () => {
+      const originalState = {
+        voteChangedBy: 0,
+        voteUpDisabled: false,
+        voteDownDisabled: false
+      };
+      const voteType = 'down';
+      let actual = limitVote(originalState, voteType);
+
+      expect(actual.voteChangedBy).to.equal(-1);
+      expect(actual.voteUpDisabled).to.equal(false);
+      expect(actual.voteDownDisabled).to.equal(true);
+
+      actual = limitVote(actual, voteType);
+      expect(actual.voteChangedBy).to.equal(-1);
+    });
   });
 });

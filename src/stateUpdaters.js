@@ -14,6 +14,12 @@ const limitVote = (state, voteType) => {
   const blockVotingUp = newVoteCount > 0;
   const blockVotingDown = newVoteCount < 0;
 
+  const currentVoteDisablingString = `vote${voteType[0].toUpperCase()}${voteType
+    .slice(1)
+    .toLowerCase()}Disabled`;
+
+  if (state[currentVoteDisablingString]) return state;
+
   return Object.assign({}, state, {
     voteChangedBy: newVoteCount,
     voteUpDisabled: blockVotingUp,
