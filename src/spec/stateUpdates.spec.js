@@ -1550,5 +1550,29 @@ describe('#StateUpdaters', () => {
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
     });
+    it('Allows up vote followed by two down and sets correct disabled states', () => {
+      const originalState = {
+        voteChangedBy: 0,
+        voteUpDisabled: false,
+        voteDownDisabled: false
+      };
+      let voteType = 'up';
+      let actual = limitVote(originalState, voteType);
+
+      expect(actual.voteChangedBy).to.equal(1);
+      expect(actual.voteUpDisabled).to.equal(true);
+      expect(actual.voteDownDisabled).to.equal(false);
+
+      voteType = 'down';
+      actual = limitVote(actual, voteType);
+      expect(actual.voteChangedBy).to.equal(0);
+      expect(actual.voteUpDisabled).to.equal(false);
+      expect(actual.voteDownDisabled).to.equal(false);
+
+      actual = limitVote(actual, voteType);
+      expect(actual.voteChangedBy).to.equal(-1);
+      expect(actual.voteUpDisabled).to.equal(false);
+      expect(actual.voteDownDisabled).to.equal(true);
+    });
   });
 });
