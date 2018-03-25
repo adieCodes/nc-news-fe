@@ -1,42 +1,29 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
+import VoteButton from './VoteButton';
 
 class ArticleCard extends Component {
   state = {
-    voteChange: 0,
+    voteChangedBy: 0,
     voteUpDisabled: false,
     voteDownDisabled: false
   };
 
-  voteUp = event => {
+  vote = (event, voteType) => {
     const articleId = this.props.article._id;
-    const newVoteChange = this.state.voteChange + 1;
-    const blockVoteUp = newVoteChange > 0;
-    const blockVoteDown = newVoteChange < 1;
+    const newVoteValue = voteType === 'up' ? 1 : -1;
+    const newVoteCount = this.state.voteChangedBy + newVoteValue;
+    const blockVotingUp = newVoteCount > 0;
+    const blockVotingDown = newVoteCount < 0;
 
     event.preventDefault();
     this.setState({
-      voteChange: newVoteChange,
-      voteUpDisabled: blockVoteUp,
-      voteDownDisabled: blockVoteDown
+      voteChangedBy: newVoteCount,
+      voteUpDisabled: blockVotingUp,
+      voteDownDisabled: blockVotingDown
     });
-    return this.props.handleVote(articleId, 'up');
-  };
-  voteDown = event => {
-    const articleId = this.props.article._id;
-    const newVoteChange = this.state.voteChange - 1;
-    const blockVoteUp = newVoteChange > 1;
-    const blockVoteDown = newVoteChange < 0;
-
-    event.preventDefault();
-
-    this.setState({
-      voteChange: newVoteChange,
-      voteUpDisabled: blockVoteUp,
-      voteDownDisabled: blockVoteDown
-    });
-    return this.props.handleVote(articleId, 'down');
+    return this.props.handleVote(articleId, voteType);
   };
 
   render() {
@@ -50,13 +37,9 @@ class ArticleCard extends Component {
         <Link to={`/topics/${this.props.article.belongs_to}`}>{this.props.article.belongs_to}</Link>
         <Link to={`/users/${this.props.article.created_by}`}>{this.props.article.created_by}</Link>
         <div className="article-card__voting-buttons">
-          <button onClick={this.voteUp} disabled={this.state.voteUpDisabled}>
-            Up
-          </button>
+          <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
           <span>{this.props.article.votes}</span>
-          <button onClick={this.voteDown} disabled={this.state.voteDownDisabled}>
-            Down
-          </button>
+          <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
       </div>
     );
