@@ -1573,6 +1573,11 @@ describe('#StateUpdaters', () => {
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
+
+      actual = limitVote(actual, voteType);
+      expect(actual.voteChangedBy).to.equal(-1);
+      expect(actual.voteUpDisabled).to.equal(false);
+      expect(actual.voteDownDisabled).to.equal(true);
     });
     it('Allows down vote followed by two up and sets correct disabled states', () => {
       const originalState = {
@@ -1591,6 +1596,11 @@ describe('#StateUpdaters', () => {
       actual = limitVote(actual, voteType);
       expect(actual.voteChangedBy).to.equal(0);
       expect(actual.voteUpDisabled).to.equal(false);
+      expect(actual.voteDownDisabled).to.equal(false);
+
+      actual = limitVote(actual, voteType);
+      expect(actual.voteChangedBy).to.equal(1);
+      expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
 
       actual = limitVote(actual, voteType);
