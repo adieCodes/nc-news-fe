@@ -18,8 +18,8 @@ class ArticlePageContainer extends Component {
     const newArticles = collectionVote(subState, id, voteType);
 
     this.setState({ [collection]: newArticles });
-    if (collection === 'article') updateArticleVote(id, voteType);
-    if (collection === 'comments') updateCommentVote(id, voteType);
+    if (collection === 'article') return updateArticleVote(id, voteType);
+    if (collection === 'comments') return updateCommentVote(id, voteType);
   };
 
   render() {
