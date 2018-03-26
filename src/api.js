@@ -37,6 +37,19 @@ const updateCommentVote = (commentId, voteType) => {
   );
 };
 
+const addComment = (articleId, comment) => {
+  return fetch(`${API_URL}/articles/${articleId}/comments`, {
+    method: 'POST',
+    body: JSON.stringify(comment),
+    mode: 'cors',
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  }).then(res => {
+    return res.json();
+  });
+};
+
 export {
   getAllArticles,
   getArticleById,
@@ -44,5 +57,6 @@ export {
   getCommentsByArticle,
   getUser,
   updateArticleVote,
-  updateCommentVote
+  updateCommentVote,
+  addComment
 };
