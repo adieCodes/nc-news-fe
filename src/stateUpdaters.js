@@ -36,7 +36,8 @@ const limitVote = (state, voteType) => {
 
 const controlledFormInput = (state, formField, input) => {
   if (state[formField] === undefined) return state;
-  return Object.assign({}, state, (state[formField] = input));
+
+  return Object.assign({}, state, { [formField]: input });
 };
 
 export { collectionVote, limitVote, controlledFormInput };
