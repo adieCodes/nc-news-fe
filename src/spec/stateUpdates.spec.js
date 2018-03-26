@@ -914,5 +914,14 @@ describe('#StateUpdaters', () => {
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
     });
+    it('returns original state if passed invalid prop', () => {
+      const state = { comment: 'A' };
+      const formField = 'comments';
+      const input = 'Aa';
+      const actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.equal(state);
+      expect(actual.comment).to.equal(state.comment);
+    });
   });
 });
