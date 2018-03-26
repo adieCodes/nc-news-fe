@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { collectionVote, limitVote } from '../stateUpdaters';
+import { collectionVote, limitVote, controlledFormInput } from '../stateUpdaters';
 
 describe('#StateUpdaters', () => {
   describe('#collectionVote', () => {
@@ -886,6 +886,42 @@ describe('#StateUpdaters', () => {
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
+    });
+  });
+  describe('#controlledFormInput', () => {
+    it('Returns new version of state with new input', () => {
+      let state = { comment: '' };
+      let formField = 'comment';
+      let input = 'A';
+      let actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.not.equal(state);
+      expect(actual.comment).to.equal(input);
+
+      state = { comment: 'A' };
+      formField = 'comment';
+      input = 'Aa';
+      actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.not.equal(state);
+      expect(actual.comment).to.equal(input);
+
+      state = { comment: 'Aa' };
+      formField = 'comment';
+      input = 'Aa1';
+      actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.not.equal(state);
+      expect(actual.comment).to.equal(input);
+    });
+    it('returns original state if passed invalid prop', () => {
+      const state = { comment: 'A' };
+      const formField = 'comments';
+      const input = 'Aa';
+      const actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.equal(state);
+      expect(actual.comment).to.equal(state.comment);
     });
   });
 });
