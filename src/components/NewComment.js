@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { controlledFormInput } from '../stateUpdaters';
+import PT from 'prop-types';
 
 class NewComment extends Component {
   state = {
@@ -14,9 +15,19 @@ class NewComment extends Component {
     this.setState(newState);
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    const comment = this.state;
+    const { articleId } = this.props;
+    const newState = controlledFormInput(this.state, 'comment', '');
+
+    this.setState(newState);
+    this.props.handleNewComment(articleId, comment);
+  };
+
   render() {
     return (
-      <form className="comment__newComment">
+      <form className="comment__newComment" onSubmit={this.handleSubmit}>
         <textarea
           type="text"
           autoFocus
@@ -29,5 +40,10 @@ class NewComment extends Component {
     );
   }
 }
+
+NewComment.propTypes = {
+  articleId: PT.string,
+  handleNewComment: PT.func.isRequired
+};
 
 export default NewComment;

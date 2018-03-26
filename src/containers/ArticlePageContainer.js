@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { getArticleById, getCommentsByArticle, updateArticleVote, updateCommentVote } from '../api';
+import {
+  getArticleById,
+  getCommentsByArticle,
+  updateArticleVote,
+  updateCommentVote,
+  addComment
+} from '../api';
 import ArticlePage from '../components/ArticlePage';
 
 import { collectionVote } from '../stateUpdaters';
@@ -22,12 +28,17 @@ class ArticlePageContainer extends Component {
     if (collection === 'comments') return updateCommentVote(id, voteType);
   };
 
+  handleNewComment = (articleId, comment) => {
+    return addComment(articleId, comment).then(res => this.setState({ comments: res.comments }));
+  };
+
   render() {
     return (
       <ArticlePage
         article={this.state.article}
         comments={this.state.comments}
         handleVote={this.handleVote}
+        handleNewComment={this.handleNewComment}
       />
     );
   }

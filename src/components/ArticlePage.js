@@ -33,7 +33,11 @@ class ArticlePage extends Component {
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
         <article className="article">{this.props.article.body}</article>
-        <CommentList comments={this.props.comments} />
+        <CommentList
+          articleId={this.props.article._id}
+          comments={this.props.comments}
+          handleNewComment={this.props.handleNewComment}
+        />
       </div>
     );
   }
@@ -42,7 +46,8 @@ class ArticlePage extends Component {
 ArticlePage.propTypes = {
   article: PT.object.isRequired,
   comments: PT.array.isRequired,
-  handleVote: PT.func.isRequired
+  handleVote: PT.func.isRequired,
+  handleNewComment: PT.func.isRequired
 };
 
 export default ArticlePage;
