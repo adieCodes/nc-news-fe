@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import CommentCard from './CommentCard';
+import CommentList from './CommentList';
 import VoteButton from './VoteButton';
 import { limitVote } from '../stateUpdaters';
 
@@ -33,9 +33,7 @@ class ArticlePage extends Component {
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
         <article className="article">{this.props.article.body}</article>
-        {this.props.comments.map(comment => (
-          <CommentCard comment={comment} key={comment._id} handleVote={this.props.handleVote} />
-        ))}
+        <CommentList comments={this.props.comments} />
       </div>
     );
   }
