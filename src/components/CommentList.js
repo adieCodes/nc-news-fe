@@ -7,7 +7,9 @@ const CommentList = props => {
   return (
     <div className="commentList">
       <NewComment handleNewComment={props.handleNewComment} articleId={props.articleId} />
-      {props.comments.map(comment => <CommentCard comment={comment} key={comment._id} />)}
+      {props.comments.map(comment => (
+        <CommentCard comment={comment} key={comment._id} handleVote={props.handleVote} />
+      ))}
     </div>
   );
 };
@@ -15,7 +17,8 @@ const CommentList = props => {
 CommentList.propTypes = {
   articleId: PT.string,
   comments: PT.array.isRequired,
-  handleNewComment: PT.func.isRequired
+  handleNewComment: PT.func.isRequired,
+  handleVote: PT.func.isRequired
 };
 
 export default CommentList;

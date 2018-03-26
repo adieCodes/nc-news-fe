@@ -37,6 +37,7 @@ class ArticlePage extends Component {
           articleId={this.props.article._id}
           comments={this.props.comments}
           handleNewComment={this.props.handleNewComment}
+          handleVote={this.props.handleVote}
         />
       </div>
     );
