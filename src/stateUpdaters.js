@@ -34,4 +34,8 @@ const limitVote = (state, voteType) => {
   });
 };
 
-export { collectionVote, limitVote };
+const controlledFormInput = (state, formField, input) => {
+  return Object.assign({}, state, (state[formField] = input));
+};
+
+export { collectionVote, limitVote, controlledFormInput };
