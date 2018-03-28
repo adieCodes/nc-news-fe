@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
 import Loading from '../components/Loading';
@@ -43,13 +43,13 @@ class ArticleListContainer extends Component {
   render() {
     const isLoading = this.state.loading;
     return (
-      <div>
+      <Fragment>
         {isLoading ? (
           <Loading />
         ) : (
           <ArticleList articles={this.state.articles} handleVote={this.handleVote} />
         )}
-      </div>
+      </Fragment>
     );
   }
 }
