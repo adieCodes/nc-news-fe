@@ -38,9 +38,9 @@ class ArticlePageContainer extends Component {
 
   deleteComment = commentId => {
     const { comments } = this.state;
-    const removeCommentFromState = removeCommentFromState(comments, commentId);
+    const updatedComments = removeCommentFromState(comments, commentId);
 
-    this.setState({ comments: removeCommentFromState });
+    this.setState({ comments: updatedComments });
   };
 
   render() {

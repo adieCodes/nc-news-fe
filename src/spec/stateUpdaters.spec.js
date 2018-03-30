@@ -929,7 +929,7 @@ describe('#StateUpdaters', () => {
       expect(actual.comment).to.equal(state.comment);
     });
   });
-  describe('#removeCommentFromState', () => {
+  describe('#deleteComment', () => {
     it('Remove commentId passed to it', () => {
       const originalComments = [
         {
