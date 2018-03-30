@@ -1045,7 +1045,7 @@ describe('#StateUpdaters', () => {
       expect(actual.length).to.equal(originalComments.length - 1);
       expect(actual).to.not.have.deep.members(originalComments);
     });
-    it('Ignores invalid commentId passed to it', () => {
+    it('Returns copy of original array if invalid commentId passed to it', () => {
       const originalComments = [
         {
           created_at: 1519635587000,
