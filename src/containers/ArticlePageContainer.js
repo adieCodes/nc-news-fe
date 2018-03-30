@@ -47,7 +47,7 @@ class ArticlePageContainer extends Component {
 
   render() {
     const articleLoading = this.state.articleLoading;
-    console.log(articleLoading);
+
     return (
       <Fragment>
         {articleLoading ? (
@@ -55,7 +55,6 @@ class ArticlePageContainer extends Component {
         ) : (
           <ArticlePage
             article={this.state.article}
-            articleLoading={!this.state.articlesLoading}
             comments={this.state.comments}
             commentsLoaded={!this.state.commentsLoading}
             handleVote={this.handleVote}
