@@ -33,12 +33,14 @@ class ArticlePage extends Component {
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
         <article className="article">{this.props.article.body}</article>
-        <CommentList
-          articleId={this.props.article._id}
-          comments={this.props.comments}
-          handleNewComment={this.props.handleNewComment}
-          handleVote={this.props.handleVote}
-        />
+        {this.props.commentsLoaded && (
+          <CommentList
+            articleId={this.props.article._id}
+            comments={this.props.comments}
+            handleNewComment={this.props.handleNewComment}
+            handleVote={this.props.handleVote}
+          />
+        )}
       </div>
     );
   }
