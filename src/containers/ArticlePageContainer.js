@@ -8,7 +8,7 @@ import {
 } from '../api';
 import ArticlePage from '../components/ArticlePage';
 import Loading from '../components/Loading';
-import { collectionVote, deleteComment } from '../stateUpdaters';
+import { collectionVote, removeCommentFromState } from '../stateUpdaters';
 
 class ArticlePageContainer extends Component {
   state = { article: {}, comments: [], articleLoading: true, commentsLoading: true };
@@ -38,9 +38,9 @@ class ArticlePageContainer extends Component {
 
   deleteComment = commentId => {
     const { comments } = this.state;
-    const removeComment = deleteComment(comments, commentId);
+    const removeCommentFromState = removeCommentFromState(comments, commentId);
 
-    this.setState({ comments: removeComment });
+    this.setState({ comments: removeCommentFromState });
   };
 
   render() {

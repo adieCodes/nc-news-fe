@@ -1,5 +1,10 @@
 import { expect } from 'chai';
-import { collectionVote, limitVote, controlledFormInput, deleteComment } from '../stateUpdaters';
+import {
+  collectionVote,
+  limitVote,
+  controlledFormInput,
+  removeCommentFromState
+} from '../stateUpdaters';
 
 describe('#StateUpdaters', () => {
   describe('#collectionVote', () => {
@@ -924,7 +929,7 @@ describe('#StateUpdaters', () => {
       expect(actual.comment).to.equal(state.comment);
     });
   });
-  describe('#deleteComment', () => {
+  describe('#removeCommentFromState', () => {
     it('Remove commentId passed to it', () => {
       const originalComments = [
         {
@@ -979,7 +984,7 @@ describe('#StateUpdaters', () => {
         }
       ];
       const commentId = originalComments[0]._id;
-      const actual = deleteComment(originalComments, commentId);
+      const actual = removeCommentFromState(originalComments, commentId);
 
       expect(actual.length).to.equal(originalComments.length - 1);
       expect(actual[0]._id).to.not.equal(commentId);
@@ -1039,7 +1044,7 @@ describe('#StateUpdaters', () => {
         }
       ];
       const commentId = originalComments[0]._id;
-      const actual = deleteComment(originalComments, commentId);
+      const actual = removeCommentFromState(originalComments, commentId);
 
       expect(actual).to.not.equal(originalComments);
       expect(actual.length).to.equal(originalComments.length - 1);
@@ -1099,7 +1104,7 @@ describe('#StateUpdaters', () => {
         }
       ];
       const commentId = 'fakeid1';
-      const actual = deleteComment(originalComments, commentId);
+      const actual = removeCommentFromState(originalComments, commentId);
 
       expect(actual.length).to.equal(originalComments.length);
       expect(actual).to.have.deep.members(originalComments);

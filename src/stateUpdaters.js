@@ -40,10 +40,10 @@ const controlledFormInput = (state, formField, input) => {
   return Object.assign({}, state, { [formField]: input });
 };
 
-const deleteComment = (commentState, commentId) => {
+const removeCommentFromState = (commentState, commentId) => {
   return commentState.filter(comment => {
     return comment._id !== commentId;
   });
 };
 
-export { collectionVote, limitVote, controlledFormInput, deleteComment };
+export { collectionVote, limitVote, controlledFormInput, removeCommentFromState };
