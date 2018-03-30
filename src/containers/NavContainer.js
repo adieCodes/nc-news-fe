@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getTopics } from '../api';
 import Nav from '../components/Nav';
 
 class NavContainer extends Component {
-  state = { topics: [] };
+  state = { topics: [], loading: true };
 
   componentDidMount() {
-    getTopics().then(res => this.setState({ topics: res.topics }));
+    getTopics().then(res => this.setState({ topics: res.topics, loading: false }));
   }
 
   render() {
-    return <Nav topics={this.state.topics} />;
+    const isLoaded = !this.state.loading;
+    return <Fragment>{isLoaded && <Nav topics={this.state.topics} />}</Fragment>;
   }
 }
 

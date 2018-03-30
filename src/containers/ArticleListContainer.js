@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
+import Loading from '../components/Loading';
 import { collectionVote } from '../stateUpdaters';
 
 class ArticleListContainer extends Component {
-  state = { articles: [], location: '' };
+  state = { articles: [], location: '', loading: true };
 
   fetchArticles(topicRequest) {
     getAllArticles(topicRequest).then(res =>
-      this.setState({ articles: res.articles, location: this.props.location })
+      this.setState({ articles: res.articles, location: this.props.location, loading: false })
     );
   }
 
@@ -40,7 +41,16 @@ class ArticleListContainer extends Component {
   };
 
   render() {
-    return <ArticleList articles={this.state.articles} handleVote={this.handleVote} />;
+    const isLoading = this.state.loading;
+    return (
+      <Fragment>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ArticleList articles={this.state.articles} handleVote={this.handleVote} />
+        )}
+      </Fragment>
+    );
   }
 }
 
