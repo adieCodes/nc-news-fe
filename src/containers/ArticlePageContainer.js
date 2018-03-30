@@ -4,11 +4,12 @@ import {
   getCommentsByArticle,
   updateArticleVote,
   updateCommentVote,
-  addComment
+  addComment,
+  deleteCommentFromApi
 } from '../api';
 import ArticlePage from '../components/ArticlePage';
 import Loading from '../components/Loading';
-import { collectionVote } from '../stateUpdaters';
+import { collectionVote, removeCommentFromState } from '../stateUpdaters';
 
 class ArticlePageContainer extends Component {
   state = { article: {}, comments: [], articleLoading: true, commentsLoading: true };
@@ -36,6 +37,14 @@ class ArticlePageContainer extends Component {
     return addComment(articleId, comment).then(res => this.setState({ comments: res.comments }));
   };
 
+  deleteComment = commentId => {
+    const { comments } = this.state;
+    const updatedComments = removeCommentFromState(comments, commentId);
+
+    this.setState({ comments: updatedComments });
+    deleteCommentFromApi(commentId);
+  };
+
   render() {
     const articleLoading = this.state.articleLoading;
     console.log(articleLoading);
@@ -51,6 +60,7 @@ class ArticlePageContainer extends Component {
             commentsLoaded={!this.state.commentsLoading}
             handleVote={this.handleVote}
             handleNewComment={this.handleNewComment}
+            deleteComment={this.deleteComment}
           />
         )}
       </Fragment>

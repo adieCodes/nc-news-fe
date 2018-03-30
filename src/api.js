@@ -50,6 +50,15 @@ const addComment = (articleId, comment) => {
   });
 };
 
+const deleteCommentFromApi = commentId => {
+  return fetch(`${API_URL}/comments/${commentId}`, {
+    method: 'DELETE'
+  })
+    .then(res => res.json())
+    .then(console.log)
+    .catch(console.log);
+};
+
 export {
   getAllArticles,
   getArticleById,
@@ -58,5 +67,6 @@ export {
   getUser,
   updateArticleVote,
   updateCommentVote,
-  addComment
+  addComment,
+  deleteCommentFromApi
 };

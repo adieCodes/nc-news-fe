@@ -39,6 +39,7 @@ class ArticlePage extends Component {
             comments={this.props.comments}
             handleNewComment={this.props.handleNewComment}
             handleVote={this.props.handleVote}
+            deleteComment={this.props.deleteComment}
           />
         )}
       </div>
@@ -50,7 +51,8 @@ ArticlePage.propTypes = {
   article: PT.object.isRequired,
   comments: PT.array.isRequired,
   handleVote: PT.func.isRequired,
-  handleNewComment: PT.func.isRequired
+  handleNewComment: PT.func.isRequired,
+  deleteComment: PT.func.isRequired
 };
 
 export default ArticlePage;
