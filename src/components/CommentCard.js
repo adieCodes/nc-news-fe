@@ -22,6 +22,7 @@ class CommentCard extends Component {
   };
 
   render() {
+    const isNorthcoder = this.props.comment.created_by === 'northcoder';
     return (
       <div className="comment-card">
         <p>{this.props.comment.body}</p>
@@ -36,6 +37,7 @@ class CommentCard extends Component {
           <span>{this.props.comment.votes}</span>
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
+        {isNorthcoder && <button>Delete</button>}
       </div>
     );
   }
