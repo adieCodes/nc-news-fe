@@ -4,7 +4,8 @@ import {
   getCommentsByArticle,
   updateArticleVote,
   updateCommentVote,
-  addComment
+  addComment,
+  deleteCommentFromApi
 } from '../api';
 import ArticlePage from '../components/ArticlePage';
 import Loading from '../components/Loading';
@@ -41,6 +42,7 @@ class ArticlePageContainer extends Component {
     const updatedComments = removeCommentFromState(comments, commentId);
 
     this.setState({ comments: updatedComments });
+    deleteCommentFromApi(commentId);
   };
 
   render() {
