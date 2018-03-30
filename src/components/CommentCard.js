@@ -21,6 +21,11 @@ class CommentCard extends Component {
     this.props.handleVote('comments', commentId, voteType);
   };
 
+  delete = event => {
+    const commentId = this.props.comment._id;
+    this.props.deleteComment(commentId);
+  };
+
   render() {
     const isNorthcoder = this.props.comment.created_by === 'northcoder';
     return (
@@ -37,7 +42,7 @@ class CommentCard extends Component {
           <span>{this.props.comment.votes}</span>
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
-        {isNorthcoder && <button>Delete</button>}
+        {isNorthcoder && <button onClick={this.delete}>Delete</button>}
       </div>
     );
   }
@@ -45,7 +50,8 @@ class CommentCard extends Component {
 
 CommentCard.propTypes = {
   comment: PT.object.isRequired,
-  handleVote: PT.func.isRequired
+  handleVote: PT.func.isRequired,
+  deleteComment: PT.func.isRequired
 };
 
 export default CommentCard;
