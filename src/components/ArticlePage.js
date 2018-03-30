@@ -50,6 +50,7 @@ class ArticlePage extends Component {
 ArticlePage.propTypes = {
   article: PT.object.isRequired,
   comments: PT.array.isRequired,
+  commentsLoaded: PT.bool.isRequired,
   handleVote: PT.func.isRequired,
   handleNewComment: PT.func.isRequired,
   deleteComment: PT.func.isRequired
