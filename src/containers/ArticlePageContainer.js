@@ -47,7 +47,7 @@ class ArticlePageContainer extends Component {
 
   render() {
     const articleLoading = this.state.articleLoading;
-    console.log(articleLoading);
+
     return (
       <Fragment>
         {articleLoading ? (
