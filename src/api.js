@@ -38,10 +38,7 @@ const addComment = (articleId, comment) =>
 const deleteCommentFromApi = commentId =>
   fetch(`${API_URL}/comments/${commentId}`, {
     method: 'DELETE'
-  })
-    .then(res => res.json())
-    .then(console.log)
-    .catch(console.log);
+  }).then(res => res.json());
 
 export {
   getAllArticles,
