@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PT from 'prop-types';
 import {
   getArticleById,
   getCommentsByArticle,
@@ -65,5 +66,9 @@ class ArticlePageContainer extends Component {
     );
   }
 }
+
+ArticlePageContainer.propTypes = {
+  match: PT.object.isRequired
+};
 
 export default ArticlePageContainer;
