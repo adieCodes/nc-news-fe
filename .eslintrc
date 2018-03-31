@@ -5,8 +5,8 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "prettier", "react-app"],
-  "plugins": ["prettier"],
+  "extends": ["prettier", "react-app", "eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["prettier", "react"],
   "rules": {
     "prettier/prettier": [
       "error",
