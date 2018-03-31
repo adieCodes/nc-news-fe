@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PT from 'prop-types';
 import { getUser } from '../api';
 import UserPage from '../components/UserPage';
 import Loading from '../components/Loading';
@@ -19,5 +20,9 @@ class UserPageContainer extends Component {
     return <Fragment>{isLoading ? <Loading /> : <UserPage user={this.state.user} />}</Fragment>;
   }
 }
+
+UserPageContainer.propTypes = {
+  match: PT.object.isRequired
+};
 
 export default UserPageContainer;

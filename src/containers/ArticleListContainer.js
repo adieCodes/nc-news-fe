@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PT from 'prop-types';
 import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
 import Loading from '../components/Loading';
@@ -53,5 +54,10 @@ class ArticleListContainer extends Component {
     );
   }
 }
+
+ArticleListContainer.propTypes = {
+  location: PT.object.isRequired,
+  match: PT.object.isRequired
+};
 
 export default ArticleListContainer;

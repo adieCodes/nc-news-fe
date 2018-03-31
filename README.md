@@ -44,7 +44,7 @@ Any function that alters state has been tested.
 
 Build steps are included to ensure:
 
-1.  code meets [Airbnb's JavaScript style guide](https://github.com/airbnb/javascript)
+1.  code meets reasonable eslint defaults
 2.  tests are passed before code is committed to git
 
 ## Built With
