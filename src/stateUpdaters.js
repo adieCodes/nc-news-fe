@@ -11,7 +11,8 @@ const collectionVote = (collection, id, voteType) => {
   return collection.map(item => {
     if (item._id === id) {
       return Object.assign({}, item, { votes: item.votes + voteValue });
-    } else return item;
+    }
+    return item;
   });
 };
 
@@ -40,10 +41,7 @@ const controlledFormInput = (state, formField, input) => {
   return Object.assign({}, state, { [formField]: input });
 };
 
-const removeCommentFromState = (commentState, commentId) => {
-  return commentState.filter(comment => {
-    return comment._id !== commentId;
-  });
-};
+const removeCommentFromState = (commentState, commentId) =>
+  commentState.filter(comment => comment._id !== commentId);
 
 export { collectionVote, limitVote, controlledFormInput, removeCommentFromState };

@@ -33,9 +33,8 @@ class ArticlePageContainer extends Component {
     if (collection === 'comments') return updateCommentVote(id, voteType);
   };
 
-  handleNewComment = (articleId, comment) => {
-    return addComment(articleId, comment).then(res => this.setState({ comments: res.comments }));
-  };
+  handleNewComment = (articleId, comment) =>
+    addComment(articleId, comment).then(res => this.setState({ comments: res.comments }));
 
   deleteComment = commentId => {
     const { comments } = this.state;

@@ -13,10 +13,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "npm run lint && react-scripts test --env=jsdom",
     "test:staged": "CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./",
+    "lint": "eslint ./ --fix",
     "precommit": "lint-staged && npm run test:staged"
   },
   "lint-staged": {
