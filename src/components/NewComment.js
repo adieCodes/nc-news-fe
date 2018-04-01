@@ -52,7 +52,7 @@ class NewComment extends Component {
           <div className="field-body">
             <div className="field">
               <div className="control">
-                <button className="button is-black" type="submit">
+                <button className="button is-black comment-btn" type="submit">
                   Submit
                 </button>
               </div>
