@@ -28,18 +28,40 @@ class ArticleCard extends Component {
     const voteCount = this.props.article.votes;
 
     return (
-      <div className="article card">
-        <h2 className="content">
-          <Link to={`/topics/${topic}/${articleId}`}>{articleTitle}</Link>
-        </h2>
-        <Link to={`/topics/${topic}`}>
-          <Icon topic={topic} />
-        </Link>
-        <Link to={`/users/${author}`}>{author}</Link>
-        <div className="card-footer">
-          <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
-          <span>{voteCount}</span>
-          <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
+      <div className="article column is-half">
+        <div className="container card">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-center">
+                <Link to={`/topics/${topic}`}>
+                  <Icon iconName={topic} />
+                </Link>
+              </div>
+              <div className="media-content has-text-centered">
+                <p className="title article-title">
+                  <Link to={`/topics/${topic}/${articleId}`}>{articleTitle}</Link>
+                </p>
+                <p className="subtitle is-6 article-subtitle">
+                  <Link to={`/users/${author}`}>@{author}</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="card-footer">
+            <div className="card-footer-item">
+              <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
+            </div>
+            <div className="card-footer-item">
+              <span>{voteCount}</span>
+            </div>
+            <div className="card-footer-item">
+              <VoteButton
+                vote={this.vote}
+                voteType="down"
+                activeState={this.state.voteDownDisabled}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
