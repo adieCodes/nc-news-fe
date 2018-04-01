@@ -54,7 +54,7 @@ a:hover {
   border: 0;
   background-color: white;
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.4s ease-in-out;
 }
 .vote-btn-up:hover:enabled {
   color: #0cce6b;
