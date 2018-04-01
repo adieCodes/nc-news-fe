@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 import VoteButton from './VoteButton';
+import Icon from './Icon';
 import { limitVote } from '../stateUpdaters';
 
 class ArticleCard extends Component {
@@ -31,7 +32,9 @@ class ArticleCard extends Component {
         <h2 className="content">
           <Link to={`/topics/${topic}/${articleId}`}>{articleTitle}</Link>
         </h2>
-        <Link to={`/topics/${topic}`}>{topic}</Link>
+        <Link to={`/topics/${topic}`}>
+          <Icon topic={topic} />
+        </Link>
         <Link to={`/users/${author}`}>{author}</Link>
         <div className="card-footer">
           <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
