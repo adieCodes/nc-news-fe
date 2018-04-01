@@ -34,8 +34,9 @@ a:hover {
   border-radius: 25%;
   background-color: white;
 }
-.article {
-  margin-top: 5rem;
+.article,
+.userPage {
+  margin-top: 4rem;
 }
 .comments {
   margin-top: 3rem;
