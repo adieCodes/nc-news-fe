@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 import PT from 'prop-types';
 
 const NavItem = ({ children }) => (
-  <li className="navItem">
-    <NavLink to={`/topics/${children.slug}`}>{children.title}</NavLink>
-  </li>
+  <NavLink className="navbar-item" to={`/topics/${children.slug}`}>
+    {children.title}
+  </NavLink>
 );
 
 NavItem.propTypes = {

@@ -7,9 +7,15 @@ const VoteButton = props => {
 
     props.vote(event, voteType);
   };
+  const iconType = props.voteType === 'up' ? 'fa-arrow-alt-circle-up' : 'fa-arrow-alt-circle-down';
   return (
-    <button onClick={triggerVote} disabled={props.activeState}>
-      {props.voteType}
+    <button
+      className={`vote-btn vote-btn-${props.voteType}`}
+      onClick={triggerVote}
+      disabled={props.activeState}
+      aria-label={`vote ${props.voteType}`}
+    >
+      <i className={`fa ${iconType} icon is-medium`} />
     </button>
   );
 };

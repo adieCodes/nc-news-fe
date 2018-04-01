@@ -1,0 +1,116 @@
+html,
+body {
+  background: #f0f2f4;
+}
+a {
+  transition: all 0.4s ease-in-out;
+  color: #363636;
+  text-decoration: underline;
+  text-decoration-color: #ddd;
+}
+a:hover {
+  text-decoration-color: #484349;
+}
+.navbar.is-white {
+  background: #f0f2f4;
+}
+.media-content p.title {
+  line-height: 1.2;
+  padding: 1rem 0;
+  margin: 1rem 0;
+  font-weight: 400;
+}
+.media-content p.subtitle,
+.comment-metaData {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+.topic-image {
+  position: absolute;
+  top: -1.25rem;
+  left: 50%;
+  margin-left: -1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 25%;
+  background-color: white;
+}
+.articleList {
+  margin-top: 1rem;
+}
+.article,
+.userPage {
+  margin-top: 4rem;
+}
+.comments {
+  margin-top: 3rem;
+}
+.comment {
+  margin: 1rem 0;
+}
+.comment-body {
+  padding: 0.5rem 0;
+}
+.comment-time {
+  padding-left: 0.25rem;
+}
+.vote-btn,
+.delete-btn {
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.vote-btn-up:hover:enabled {
+  color: #0cce6b;
+  transform: scale(1.1);
+}
+.vote-btn-down:hover:enabled {
+  color: #ff3c38;
+  transform: scale(1.1);
+}
+.delete-btn:hover {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+.comment-form {
+  padding: 1rem;
+}
+.textarea {
+  border: 2px solid #ccc;
+}
+.comment-btn {
+  transition: all 0.4s ease-in-out;
+}
+.comment-btn:hover:enabled {
+  background-color: #0cce6b;
+  transform: scale(1.05);
+}
+.loading {
+  justify-content: space-around;
+  margin-top: 5rem;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-0.5px, 0, 0);
+  }
+
+  30%,
+  80% {
+    transform: translate3d(0.5px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(1px, 0, 0);
+  }
+}
