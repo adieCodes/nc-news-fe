@@ -37,8 +37,9 @@ const limitVote = (state, voteType) => {
 
 const controlledFormInput = (state, formField, input) => {
   if (state[formField] === undefined) return state;
+  const isThereContent = input.length > 0;
 
-  return Object.assign({}, state, { [formField]: input });
+  return Object.assign({}, state, { [formField]: input, formActive: isThereContent });
 };
 
 const removeCommentFromState = (commentState, commentId) =>

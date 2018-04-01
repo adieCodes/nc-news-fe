@@ -928,6 +928,15 @@ describe('#StateUpdaters', () => {
       expect(actual).to.equal(state);
       expect(actual.comment).to.equal(state.comment);
     });
+    it("sets form to active if there's content", () => {
+      const state = { comment: 'Aa' };
+      const formField = 'comment';
+      const input = 'Aab';
+      const actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.not.equal(state);
+      expect(actual.formActive).to.be.true;
+    });
   });
   describe('#deleteComment', () => {
     it('Remove commentId passed to it', () => {

@@ -4,13 +4,14 @@ import PT from 'prop-types';
 
 class NewComment extends Component {
   state = {
-    comment: ''
+    comment: '',
+    formActive: false
   };
 
   handleChange = event => {
     event.preventDefault();
-    const newComment = event.target.value;
-    const newState = controlledFormInput(this.state, 'comment', newComment);
+    const userInput = event.target.value;
+    const newState = controlledFormInput(this.state, 'comment', userInput);
 
     this.setState(newState);
   };
@@ -26,6 +27,8 @@ class NewComment extends Component {
   };
 
   render() {
+    const isFormDisabled = !this.state.formActive;
+
     return (
       <form className="comment-form card" onSubmit={this.handleSubmit}>
         <div className="is-horizontal field">
@@ -52,7 +55,11 @@ class NewComment extends Component {
           <div className="field-body">
             <div className="field">
               <div className="control">
-                <button className="button is-black comment-btn" type="submit">
+                <button
+                  className="button is-black comment-btn"
+                  type="submit"
+                  disabled={isFormDisabled}
+                >
                   Submit
                 </button>
               </div>
