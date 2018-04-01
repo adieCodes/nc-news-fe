@@ -937,6 +937,15 @@ describe('#StateUpdaters', () => {
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.true;
     });
+    it("sets form to deactive if there's no content", () => {
+      const state = { comment: 'A' };
+      const formField = 'comment';
+      const input = '';
+      const actual = controlledFormInput(state, formField, input);
+
+      expect(actual).to.not.equal(state);
+      expect(actual.formActive).to.be.false;
+    });
   });
   describe('#deleteComment', () => {
     it('Remove commentId passed to it', () => {
