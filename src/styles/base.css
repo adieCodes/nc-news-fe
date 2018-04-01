@@ -17,7 +17,8 @@ a:hover {
   margin: 1rem 0;
   font-weight: 400;
 }
-.media-content p.subtitle {
+.media-content p.subtitle,
+.comment-metaData {
   padding: 1rem 0;
   margin-bottom: 1rem;
 }
@@ -36,7 +37,17 @@ a:hover {
 .comments {
   margin-top: 3rem;
 }
-.vote-btn {
+.comment {
+  margin: 1rem 0;
+}
+.comment-body {
+  padding: 0.5rem 0;
+}
+.comment-time {
+  padding-left: 0.25rem;
+}
+.vote-btn,
+.delete-btn {
   border: 0;
   background-color: white;
   cursor: pointer;

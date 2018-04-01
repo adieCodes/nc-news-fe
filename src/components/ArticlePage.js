@@ -29,7 +29,7 @@ class ArticlePage extends Component {
     const content = this.props.article.body;
 
     return (
-      <div className="articlePage container">
+      <div className="articlePage container column is-two-thirds">
         <article className="article">
           <div className="container card">
             <div className="card-content">
@@ -72,17 +72,15 @@ class ArticlePage extends Component {
           </div>
         </article>
         <div className="comments">
-          <div className="container card">
-            {this.props.commentsLoaded && (
-              <CommentList
-                articleId={this.props.article._id}
-                comments={this.props.comments}
-                handleNewComment={this.props.handleNewComment}
-                handleVote={this.props.handleVote}
-                deleteComment={this.props.deleteComment}
-              />
-            )}
-          </div>
+          {this.props.commentsLoaded && (
+            <CommentList
+              articleId={this.props.article._id}
+              comments={this.props.comments}
+              handleNewComment={this.props.handleNewComment}
+              handleVote={this.props.handleVote}
+              deleteComment={this.props.deleteComment}
+            />
+          )}
         </div>
       </div>
     );

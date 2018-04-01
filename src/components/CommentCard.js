@@ -28,21 +28,46 @@ class CommentCard extends Component {
 
   render() {
     const isNorthcoder = this.props.comment.created_by === 'northcoder';
+    const content = this.props.comment.body;
+    const author = this.props.comment.created_by;
+
     return (
-      <div className="comment-card">
-        <p>{this.props.comment.body}</p>
-        <p>
-          <Link to={`/users/${this.props.comment.created_by}`}>
-            {this.props.comment.created_by}
-          </Link>
-        </p>
-        <p>{unixTimeStampToString(this.props.comment.created_at)}</p>
-        <div className="article-card__voting-buttons">
-          <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
-          <span>{this.props.comment.votes}</span>
-          <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
+      <div className="comment">
+        <div className="card">
+          <div className="card-content">
+            <p className="comment-body">{content}</p>
+            <div className="comment-metaData media-content">
+              <span className="subtitle is-6 comment-subtitle">
+                <Link to={`/users/${author}`}>@{author}</Link>
+              </span>
+              <time className="comment-time" dateTime={this.props.comment.created_at}>
+                {unixTimeStampToString(this.props.comment.created_at)}
+              </time>
+            </div>
+          </div>
+          <div className="card-footer">
+            <div className="card-footer-item">
+              <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
+            </div>
+            <div className="card-footer-item">
+              <span aria-label="vote count">{this.props.comment.votes}</span>
+            </div>
+            <div className="card-footer-item">
+              <VoteButton
+                vote={this.vote}
+                voteType="down"
+                activeState={this.state.voteDownDisabled}
+              />
+            </div>
+            {isNorthcoder && (
+              <div className="card-footer-item">
+                <button className="delete-btn" onClick={this.delete} aria-label="delete comment">
+                  <i className="fa fa-trash icon is-medium" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-        {isNorthcoder && <button onClick={this.delete}>Delete</button>}
       </div>
     );
   }
