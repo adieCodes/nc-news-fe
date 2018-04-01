@@ -17,18 +17,20 @@ class Nav extends Component {
     const burgerMenuClass = this.state.burgerMenuActive ? 'is-active' : '';
     return (
       <nav className="navbar is-fixed-top" aria-label="main navigation">
-        <div className="navbar-brand">
-          <Link to="/" className="navbar-item">
-            NC NEWS
-          </Link>
-          <div className={`navbar-burger ${burgerMenuClass}`} onClick={this.handleClick}>
-            <span />
-            <span />
-            <span />
+        <div className="container">
+          <div className="navbar-brand">
+            <Link to="/" className="navbar-item">
+              NC NEWS
+            </Link>
+            <div className={`navbar-burger ${burgerMenuClass}`} onClick={this.handleClick}>
+              <span />
+              <span />
+              <span />
+            </div>
           </div>
-        </div>
-        <div className={`navbar-menu navbar-end ${burgerMenuClass}`}>
-          {this.props.topics.map(topic => <NavItem key={topic._id}>{topic}</NavItem>)}
+          <div className={`navbar-menu navbar-end ${burgerMenuClass}`}>
+            {this.props.topics.map(topic => <NavItem key={topic._id}>{topic}</NavItem>)}
+          </div>
         </div>
       </nav>
     );
