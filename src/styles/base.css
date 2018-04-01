@@ -33,6 +33,9 @@ a:hover {
 .article {
   margin-top: 5rem;
 }
+.comments {
+  margin-top: 3rem;
+}
 .vote-btn {
   border: 0;
   background-color: white;

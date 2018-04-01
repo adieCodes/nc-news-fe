@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
+import Icon from './Icon';
 
 import CommentList from './CommentList';
 import VoteButton from './VoteButton';
@@ -22,26 +23,67 @@ class ArticlePage extends Component {
   };
 
   render() {
+    const topic = this.props.article.belongs_to;
+    const { title } = this.props.article;
+    const author = this.props.article.created_by;
+    const content = this.props.article.body;
+
     return (
-      <div className="articlePage">
-        <h1>{this.props.article.title}</h1>
-        <Link to={`/topics/${this.props.article.belongs_to}`}>{this.props.article.belongs_to}</Link>
-        <Link to={`/users/${this.props.article.created_by}`}>{this.props.article.created_by}</Link>
-        <div className="article-card__voting-buttons">
-          <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
-          <span>{this.props.article.votes}</span>
-          <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
+      <div className="articlePage container">
+        <article className="article">
+          <div className="container card">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-center">
+                  <Link to={`/topics/${topic}`}>
+                    <Icon iconName={topic} />
+                  </Link>
+                </div>
+                <div className="media-content">
+                  <p className="title article-title">{title}</p>
+                  <p className="subtitle is-6 article-subtitle">
+                    <Link to={`/users/${author}`}>@{author}</Link>
+                  </p>
+                </div>
+              </div>
+              <div className="content article-body">
+                <p>{content}</p>
+              </div>
+            </div>
+            <div className="card-footer">
+              <div className="card-footer-item">
+                <VoteButton
+                  vote={this.vote}
+                  voteType="up"
+                  activeState={this.state.voteUpDisabled}
+                />
+              </div>
+              <div className="card-footer-item">
+                <span>{this.props.article.votes}</span>
+              </div>
+              <div className="card-footer-item">
+                <VoteButton
+                  vote={this.vote}
+                  voteType="down"
+                  activeState={this.state.voteDownDisabled}
+                />
+              </div>
+            </div>
+          </div>
+        </article>
+        <div className="comments">
+          <div className="container card">
+            {this.props.commentsLoaded && (
+              <CommentList
+                articleId={this.props.article._id}
+                comments={this.props.comments}
+                handleNewComment={this.props.handleNewComment}
+                handleVote={this.props.handleVote}
+                deleteComment={this.props.deleteComment}
+              />
+            )}
+          </div>
         </div>
-        <article className="article">{this.props.article.body}</article>
-        {this.props.commentsLoaded && (
-          <CommentList
-            articleId={this.props.article._id}
-            comments={this.props.comments}
-            handleNewComment={this.props.handleNewComment}
-            handleVote={this.props.handleVote}
-            deleteComment={this.props.deleteComment}
-          />
-        )}
       </div>
     );
   }
