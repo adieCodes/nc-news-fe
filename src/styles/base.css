@@ -41,3 +41,9 @@ a:hover {
   background-color: white;
   cursor: pointer;
 }
+.comment-form {
+  padding: 1rem;
+}
+.textarea {
+  border: 2px solid #ccc;
+}

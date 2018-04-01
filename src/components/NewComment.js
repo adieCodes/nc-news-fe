@@ -27,15 +27,38 @@ class NewComment extends Component {
 
   render() {
     return (
-      <form className="comment__newComment" onSubmit={this.handleSubmit}>
-        <textarea
-          type="text"
-          autoFocus
-          placeholder="Join the conversation"
-          onChange={this.handleChange}
-          value={this.state.comment}
-        />
-        <button type="submit">Submit</button>
+      <form className="comment-form" onSubmit={this.handleSubmit}>
+        <div className="is-horizontal field">
+          <div className="field-label is-normal">
+            <label className="label">Add comment</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <textarea
+                  className="textarea"
+                  type="text"
+                  autoFocus
+                  placeholder="Join the conversation"
+                  onChange={this.handleChange}
+                  value={this.state.comment}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="field is-horizontal">
+          <div className="field-label">{/*  left empty for spacing */}</div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <button className="button is-black" type="submit">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     );
   }
