@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import {
   collectionVote,
   limitVote,
-  controlledFormInput,
+  controlledCommentFormInput,
   removeCommentFromState
 } from '../stateUpdaters';
 
@@ -893,55 +893,49 @@ describe('#StateUpdaters', () => {
       expect(actual.voteDownDisabled).to.equal(false);
     });
   });
-  describe('#controlledFormInput', () => {
+  describe('#controlledCommentFormInput', () => {
     it('Returns new version of state with new input', () => {
       let state = { comment: '' };
-      let formField = 'comment';
       let input = 'A';
-      let actual = controlledFormInput(state, formField, input);
+      let actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'A' };
-      formField = 'comment';
       input = 'Aa';
-      actual = controlledFormInput(state, formField, input);
+      actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'Aa' };
-      formField = 'comment';
       input = 'Aa1';
-      actual = controlledFormInput(state, formField, input);
+      actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
     });
-    it('returns original state if passed invalid prop', () => {
+    it('returns original state if passed same content', () => {
       const state = { comment: 'A' };
-      const formField = 'comments';
-      const input = 'Aa';
-      const actual = controlledFormInput(state, formField, input);
+      const input = 'A';
+      const actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.equal(state);
       expect(actual.comment).to.equal(state.comment);
     });
     it("sets form to active if there's content", () => {
-      const state = { comment: 'Aa' };
-      const formField = 'comment';
-      const input = 'Aab';
-      const actual = controlledFormInput(state, formField, input);
+      const state = { comment: '' };
+      const input = 'A';
+      const actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.true;
     });
     it("sets form to deactive if there's no content", () => {
       const state = { comment: 'A' };
-      const formField = 'comment';
       const input = '';
-      const actual = controlledFormInput(state, formField, input);
+      const actual = controlledCommentFormInput(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.false;
