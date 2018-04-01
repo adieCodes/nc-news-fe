@@ -8,12 +8,12 @@ const Icon = props => {
     coding: 'code'
   };
 
-  const iconName = classFinder[props.topic];
-  return <i className={`fas fa-${iconName} icon is-medium`} />;
+  const iconName = classFinder[props.iconName];
+  return <i className={`fas fa-${iconName} icon is-large topic-image`} />;
 };
 
 Icon.propTypes = {
-  topic: PT.string.isRequired
+  iconName: PT.string.isRequired
 };
 
 export default Icon;
