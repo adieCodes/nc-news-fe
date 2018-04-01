@@ -20,18 +20,22 @@ class ArticleCard extends Component {
   };
 
   render() {
+    const topic = this.props.article.belongs_to;
+    const articleId = this.props.article._id;
+    const articleTitle = this.props.article.title;
+    const author = this.props.article.created_by;
+    const voteCount = this.props.article.votes;
+
     return (
-      <div className="article-card">
-        <h2>
-          <Link to={`/topics/${this.props.article.belongs_to}/${this.props.article._id}`}>
-            {this.props.article.title}
-          </Link>
+      <div className="article card">
+        <h2 className="content">
+          <Link to={`/topics/${topic}/${articleId}`}>{articleTitle}</Link>
         </h2>
-        <Link to={`/topics/${this.props.article.belongs_to}`}>{this.props.article.belongs_to}</Link>
-        <Link to={`/users/${this.props.article.created_by}`}>{this.props.article.created_by}</Link>
-        <div className="article-card__voting-buttons">
+        <Link to={`/topics/${topic}`}>{topic}</Link>
+        <Link to={`/users/${author}`}>{author}</Link>
+        <div className="card-footer">
           <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
-          <span>{this.props.article.votes}</span>
+          <span>{voteCount}</span>
           <VoteButton vote={this.vote} voteType="down" activeState={this.state.voteDownDisabled} />
         </div>
       </div>
