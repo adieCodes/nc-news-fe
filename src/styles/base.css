@@ -54,16 +54,18 @@ a:hover {
   border: 0;
   background-color: white;
   cursor: pointer;
-  transition: color 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .vote-btn-up:hover:enabled {
   color: #0cce6b;
+  transform: scale(1.1);
 }
 .vote-btn-down:hover:enabled {
-  color: #8af3ff;
+  color: #ff3c38;
+  transform: scale(1.1);
 }
 .delete-btn:hover {
-  color: #ff3c38;
+  transform: scale(1.1);
 }
 .comment-form {
   padding: 1rem;
@@ -72,10 +74,11 @@ a:hover {
   border: 2px solid #ccc;
 }
 .comment-btn {
-  transition: background-color 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .comment-btn:hover:enabled {
   background-color: #0cce6b;
+  transform: scale(1.05);
 }
 .loading {
   justify-content: space-around;
