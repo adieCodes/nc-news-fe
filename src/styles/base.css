@@ -58,3 +58,7 @@ a:hover {
 .textarea {
   border: 2px solid #ccc;
 }
+.loading {
+  justify-content: space-around;
+  margin-top: 5rem;
+}
