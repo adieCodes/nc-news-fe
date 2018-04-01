@@ -56,10 +56,10 @@ a:hover {
   cursor: pointer;
   transition: color 0.3s ease-in-out;
 }
-.vote-btn-up:hover {
+.vote-btn-up:hover:enabled {
   color: #0cce6b;
 }
-.vote-btn-down:hover {
+.vote-btn-down:hover:enabled {
   color: #ff3c38;
 }
 .comment-form {
