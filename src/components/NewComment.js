@@ -27,7 +27,7 @@ class NewComment extends Component {
 
   render() {
     return (
-      <form className="comment-form" onSubmit={this.handleSubmit}>
+      <form className="comment-form card" onSubmit={this.handleSubmit}>
         <div className="is-horizontal field">
           <div className="field-label is-normal">
             <label className="label">Add comment</label>
