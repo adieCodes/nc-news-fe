@@ -9,7 +9,7 @@ const Icon = props => {
   };
 
   const iconName = classFinder[props.topic];
-  return <i className={`fas fa-${iconName}`} />;
+  return <i className={`fas fa-${iconName} icon is-medium`} />;
 };
 
 Icon.propTypes = {
