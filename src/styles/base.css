@@ -3,10 +3,13 @@ body {
   background: #f0f2f4;
 }
 a {
+  transition: all 0.4s ease-in-out;
   color: #363636;
+  text-decoration: underline;
+  text-decoration-color: #ddd;
 }
 a:hover {
-  text-decoration: underline;
+  text-decoration-color: #484349;
 }
 .navbar.is-white {
   background: #f0f2f4;
