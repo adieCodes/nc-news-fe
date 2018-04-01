@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { controlledFormInput } from '../stateUpdaters';
+import { controlledCommentFormInput } from '../stateUpdaters';
 import PT from 'prop-types';
 
 class NewComment extends Component {
   state = {
-    comment: ''
+    comment: '',
+    formActive: false
   };
 
   handleChange = event => {
     event.preventDefault();
-    const newComment = event.target.value;
-    const newState = controlledFormInput(this.state, 'comment', newComment);
+    const userInput = event.target.value;
+    const newState = controlledCommentFormInput(this.state, userInput);
 
     this.setState(newState);
   };
@@ -19,13 +20,15 @@ class NewComment extends Component {
     event.preventDefault();
     const comment = this.state;
     const { articleId } = this.props;
-    const newState = controlledFormInput(this.state, 'comment', '');
+    const newState = controlledCommentFormInput(this.state, '');
 
     this.setState(newState);
     this.props.handleNewComment(articleId, comment);
   };
 
   render() {
+    const isFormDisabled = !this.state.formActive;
+
     return (
       <form className="comment-form card" onSubmit={this.handleSubmit}>
         <div className="is-horizontal field">
@@ -52,7 +55,11 @@ class NewComment extends Component {
           <div className="field-body">
             <div className="field">
               <div className="control">
-                <button className="button is-black comment-btn" type="submit">
+                <button
+                  className="button is-black comment-btn"
+                  type="submit"
+                  disabled={isFormDisabled}
+                >
                   Submit
                 </button>
               </div>

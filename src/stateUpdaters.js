@@ -35,13 +35,14 @@ const limitVote = (state, voteType) => {
   });
 };
 
-const controlledFormInput = (state, formField, input) => {
-  if (state[formField] === undefined) return state;
+const controlledCommentFormInput = (state, input) => {
+  if (input === state.comment) return state;
+  const isThereContent = input.length > 0;
 
-  return Object.assign({}, state, { [formField]: input });
+  return Object.assign({}, state, { comment: input, formActive: isThereContent });
 };
 
 const removeCommentFromState = (commentState, commentId) =>
   commentState.filter(comment => comment._id !== commentId);
 
-export { collectionVote, limitVote, controlledFormInput, removeCommentFromState };
+export { collectionVote, limitVote, controlledCommentFormInput, removeCommentFromState };
