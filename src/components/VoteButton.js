@@ -10,7 +10,7 @@ const VoteButton = props => {
   const iconType = props.voteType === 'up' ? 'fa-arrow-alt-circle-up' : 'fa-arrow-alt-circle-down';
   return (
     <button
-      className="vote-btn"
+      className={`vote-btn vote-btn-${props.voteType}`}
       onClick={triggerVote}
       disabled={props.activeState}
       aria-label={`vote ${props.voteType}`}

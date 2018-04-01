@@ -51,6 +51,13 @@ a:hover {
   border: 0;
   background-color: white;
   cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.vote-btn-up:hover {
+  color: #0cce6b;
+}
+.vote-btn-down:hover {
+  color: #ff3c38;
 }
 .comment-form {
   padding: 1rem;
