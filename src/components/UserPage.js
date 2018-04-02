@@ -13,11 +13,18 @@ const UserPage = props => (
           <div className="media-content">
             <p className="title userPage-title">{props.userData.name}</p>
             <p className="subtitle is-6 userPage-subtitle">@{props.userData.username}</p>
+            <a href="#articles">
+              <p>
+                <strong>{props.userArticles.length}</strong> Articles
+              </p>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <ArticleList articles={props.userArticles} votingActive={false} />;
+    <div className="articleList" id="articles">
+      <ArticleList articles={props.userArticles} votingActive={false} />;
+    </div>
   </div>
 );
 
