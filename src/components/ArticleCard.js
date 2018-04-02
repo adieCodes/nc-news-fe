@@ -48,19 +48,27 @@ class ArticleCard extends Component {
             </div>
           </div>
           <div className="card-footer">
-            <div className="card-footer-item">
-              <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
-            </div>
+            {this.props.votingActive && (
+              <div className="card-footer-item">
+                <VoteButton
+                  vote={this.vote}
+                  voteType="up"
+                  activeState={this.state.voteUpDisabled}
+                />
+              </div>
+            )}
             <div className="card-footer-item">
               <span aria-label="vote count">{voteCount}</span>
             </div>
-            <div className="card-footer-item">
-              <VoteButton
-                vote={this.vote}
-                voteType="down"
-                activeState={this.state.voteDownDisabled}
-              />
-            </div>
+            {this.props.votingActive && (
+              <div className="card-footer-item">
+                <VoteButton
+                  vote={this.vote}
+                  voteType="down"
+                  activeState={this.state.voteDownDisabled}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -70,7 +78,8 @@ class ArticleCard extends Component {
 
 ArticleCard.propTypes = {
   article: PT.object.isRequired,
-  handleVote: PT.func.isRequired
+  handleVote: PT.func.isRequired,
+  votingActive: PT.bool.isRequired
 };
 
 export default ArticleCard;
