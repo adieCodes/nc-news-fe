@@ -23,7 +23,7 @@ ArticleCard.defaultProps = {
 
 ArticleList.propTypes = {
   articles: PT.array.isRequired,
-  handleVote: PT.func.isRequired,
+  handleVote: PT.func,
   votingActive: PT.bool
 };
 
