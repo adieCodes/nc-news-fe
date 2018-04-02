@@ -7,11 +7,11 @@ const UserPage = props => (
       <div className="card-content">
         <div className="media">
           <div className="media-center">
-            <img src={props.user.avatar_url} alt={`profile shot for ${props.user.name}`} />
+            <img src={props.userData.avatar_url} alt={`profile shot for ${props.userData.name}`} />
           </div>
           <div className="media-content">
-            <p className="title userPage-title">{props.user.name}</p>
-            <p className="subtitle is-6 userPage-subtitle">@{props.user.username}</p>
+            <p className="title userPage-title">{props.userData.name}</p>
+            <p className="subtitle is-6 userPage-subtitle">@{props.userData.username}</p>
           </div>
         </div>
       </div>
@@ -20,7 +20,9 @@ const UserPage = props => (
 );
 
 UserPage.propTypes = {
-  user: PT.object.isRequired
+  userData: PT.object.isRequired,
+  userArticles: PT.array.isRequired,
+  userComments: PT.array.isRequired
 };
 
 export default UserPage;

@@ -6,18 +6,39 @@ import Loading from '../components/Loading';
 
 class UserPageContainer extends Component {
   state = {
-    user: {},
+    userData: {},
+    userArticles: [],
+    userComments: [],
     loading: true
   };
 
   componentDidMount() {
     const { userName } = this.props.match.params;
-    getUser(userName).then(res => this.setState({ user: res.user, loading: false }));
+    getUser(userName).then(res => {
+      this.setState({
+        userData: res.userData,
+        userArticles: res.userArticles,
+        userComments: res.userComments,
+        loading: false
+      });
+    });
   }
 
   render() {
     const isLoading = this.state.loading;
-    return <Fragment>{isLoading ? <Loading /> : <UserPage user={this.state.user} />}</Fragment>;
+    return (
+      <Fragment>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <UserPage
+            userData={this.state.userData}
+            userArticles={this.state.userArticles}
+            userComments={this.state.userComments}
+          />
+        )}
+      </Fragment>
+    );
   }
 }
 
