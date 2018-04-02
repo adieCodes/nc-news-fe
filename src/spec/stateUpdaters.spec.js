@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import {
-  collectionVote,
+  updateVoteState,
   limitVote,
   controlledCommentFormInput,
   removeCommentFromState
 } from '../stateUpdaters';
 
 describe('#StateUpdaters', () => {
-  describe('#collectionVote', () => {
+  describe('#updateVoteState', () => {
     it('does not mutate state', () => {
       const originalArticles = [
         {
@@ -374,7 +374,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteState(originalArticles, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticles);
     });
@@ -390,7 +390,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteState(originalArticle, articleId, voteType);
 
       expect(actual.votes).to.equal(originalArticle.votes + 1);
     });
@@ -406,7 +406,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteState(originalArticle, articleId, voteType);
 
       expect(actual.votes).to.equal(originalArticle.votes - 1);
     });
@@ -422,7 +422,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteState(originalArticle, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticle.votes - 1);
     });
@@ -491,7 +491,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteState(originalArticles, articleId, voteType);
 
       expect(actual[0].votes).to.equal(originalArticles[0].votes + 1);
     });
@@ -560,7 +560,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[originalArticles.length - 1]._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteState(originalArticles, articleId, voteType);
 
       expect(actual[actual.length - 1].votes).to.equal(
         originalArticles[originalArticles.length - 1].votes - 1
@@ -621,7 +621,7 @@ describe('#StateUpdaters', () => {
       ];
       const commentId = originalComments[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalComments, commentId, voteType);
+      const actual = updateVoteState(originalComments, commentId, voteType);
 
       expect(actual[0].votes).to.equal(originalComments[0].votes + 1);
     });
@@ -680,7 +680,7 @@ describe('#StateUpdaters', () => {
       ];
       const commentId = originalComments[4]._id;
       const voteType = 'down';
-      const actual = collectionVote(originalComments, commentId, voteType);
+      const actual = updateVoteState(originalComments, commentId, voteType);
 
       expect(actual[4].votes).to.equal(originalComments[4].votes - 1);
     });
@@ -749,7 +749,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[originalArticles.length - 1]._id;
       const voteType = 'why';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteState(originalArticles, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticles);
       expect(actual[originalArticles.length - 1].votes).to.equal(
