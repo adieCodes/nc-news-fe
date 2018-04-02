@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 import VoteButton from './VoteButton';
 import Icon from './Icon';
-import { limitVote } from '../stateUpdaters';
+import { localVoteStateValidator } from '../stateUpdaters';
 
 class ArticleCard extends Component {
   state = {
@@ -14,7 +14,7 @@ class ArticleCard extends Component {
 
   vote = (event, voteType) => {
     const articleId = this.props.article._id;
-    const newState = limitVote(this.state, voteType);
+    const newState = localVoteStateValidator(this.state, voteType);
 
     this.setState(newState);
     return this.props.handleVote(articleId, voteType);

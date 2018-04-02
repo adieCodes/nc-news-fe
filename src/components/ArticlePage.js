@@ -5,7 +5,7 @@ import Icon from './Icon';
 
 import CommentList from './CommentList';
 import VoteButton from './VoteButton';
-import { limitVote } from '../stateUpdaters';
+import { localVoteStateValidator } from '../stateUpdaters';
 
 class ArticlePage extends Component {
   state = {
@@ -16,7 +16,7 @@ class ArticlePage extends Component {
 
   vote = (event, voteType) => {
     const articleId = this.props.article._id;
-    const newState = limitVote(this.state, voteType);
+    const newState = localVoteStateValidator(this.state, voteType);
 
     this.setState(newState);
     this.props.handleVote('article', articleId, voteType);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
 import { unixTimeStampToString } from '../helpers/timeHelpers';
-import { limitVote } from '../stateUpdaters';
+import { localVoteStateValidator } from '../stateUpdaters';
 
 import VoteButton from './VoteButton';
 
@@ -15,7 +15,7 @@ class CommentCard extends Component {
 
   vote = (event, voteType) => {
     const commentId = this.props.comment._id;
-    const newState = limitVote(this.state, voteType);
+    const newState = localVoteStateValidator(this.state, voteType);
 
     this.setState(newState);
     this.props.handleVote('comments', commentId, voteType);

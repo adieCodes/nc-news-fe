@@ -16,7 +16,7 @@ const updateVoteStateForCollection = (collection, id, voteType) => {
   });
 };
 
-const limitVote = (state, voteType) => {
+const localVoteStateValidator = (state, voteType) => {
   const newVoteValue = voteType === 'up' ? 1 : -1;
   const voteTypePropNameInState = `vote${voteType[0].toUpperCase()}${voteType
     .slice(1)
@@ -48,7 +48,7 @@ const removeCommentFromState = (commentState, commentId) =>
 
 export {
   updateVoteStateForCollection,
-  limitVote,
+  localVoteStateValidator,
   updateControlledFormState,
   removeCommentFromState
 };
