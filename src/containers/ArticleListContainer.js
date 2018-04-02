@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import { getAllArticles, updateArticleVote } from '../api';
 import ArticleList from '../components/ArticleList';
 import Loading from '../components/Loading';
-import { updateVoteState } from '../stateUpdaters';
+import { updateVoteStateForCollection } from '../stateUpdaters';
 
 class ArticleListContainer extends Component {
   state = { articles: [], location: '', loading: true };
@@ -35,7 +35,7 @@ class ArticleListContainer extends Component {
 
   handleVote = (articleId, voteType) => {
     const { articles } = this.state;
-    const newArticles = updateVoteState(articles, articleId, voteType);
+    const newArticles = updateVoteStateForCollection(articles, articleId, voteType);
 
     this.setState({ articles: newArticles });
     updateArticleVote(articleId, voteType);

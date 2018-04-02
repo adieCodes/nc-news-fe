@@ -1,4 +1,4 @@
-const updateVoteState = (collection, id, voteType) => {
+const updateVoteStateForCollection = (collection, id, voteType) => {
   if (!/^down$|^up$/.test(voteType)) return collection.slice(0);
   const voteValue = voteType === 'up' ? 1 : -1;
 
@@ -46,4 +46,9 @@ const updateControlledFormState = (state, input) => {
 const removeCommentFromState = (commentState, commentId) =>
   commentState.filter(comment => comment._id !== commentId);
 
-export { updateVoteState, limitVote, updateControlledFormState, removeCommentFromState };
+export {
+  updateVoteStateForCollection,
+  limitVote,
+  updateControlledFormState,
+  removeCommentFromState
+};
