@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { controlledCommentFormInput } from '../stateUpdaters';
+import { updateControlledFormState } from '../stateUpdaters';
 import PT from 'prop-types';
 
 class NewComment extends Component {
@@ -11,7 +11,7 @@ class NewComment extends Component {
   handleChange = event => {
     event.preventDefault();
     const userInput = event.target.value;
-    const newState = controlledCommentFormInput(this.state, userInput);
+    const newState = updateControlledFormState(this.state, userInput);
 
     this.setState(newState);
   };
@@ -20,7 +20,7 @@ class NewComment extends Component {
     event.preventDefault();
     const comment = this.state;
     const { articleId } = this.props;
-    const newState = controlledCommentFormInput(this.state, '');
+    const newState = updateControlledFormState(this.state, '');
 
     this.setState(newState);
     this.props.handleNewComment(articleId, comment);

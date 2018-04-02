@@ -35,7 +35,7 @@ const limitVote = (state, voteType) => {
   });
 };
 
-const controlledCommentFormInput = (state, input) => {
+const updateControlledFormState = (state, input) => {
   if (input === state.comment) return state;
   const isThereContent = input.length > 0;
 
@@ -45,4 +45,4 @@ const controlledCommentFormInput = (state, input) => {
 const removeCommentFromState = (commentState, commentId) =>
   commentState.filter(comment => comment._id !== commentId);
 
-export { updateVoteState, limitVote, controlledCommentFormInput, removeCommentFromState };
+export { updateVoteState, limitVote, updateControlledFormState, removeCommentFromState };

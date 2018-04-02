@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import {
   updateVoteState,
   limitVote,
-  controlledCommentFormInput,
+  updateControlledFormState,
   removeCommentFromState
 } from '../stateUpdaters';
 
@@ -893,25 +893,25 @@ describe('#StateUpdaters', () => {
       expect(actual.voteDownDisabled).to.equal(false);
     });
   });
-  describe('#controlledCommentFormInput', () => {
+  describe('#updateControlledFormState', () => {
     it('Returns new version of state with new input', () => {
       let state = { comment: '' };
       let input = 'A';
-      let actual = controlledCommentFormInput(state, input);
+      let actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'A' };
       input = 'Aa';
-      actual = controlledCommentFormInput(state, input);
+      actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'Aa' };
       input = 'Aa1';
-      actual = controlledCommentFormInput(state, input);
+      actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
@@ -919,7 +919,7 @@ describe('#StateUpdaters', () => {
     it('returns original state if passed same content', () => {
       const state = { comment: 'A' };
       const input = 'A';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.equal(state);
       expect(actual.comment).to.equal(state.comment);
@@ -927,7 +927,7 @@ describe('#StateUpdaters', () => {
     it("sets form to active if there's content", () => {
       const state = { comment: '' };
       const input = 'A';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.true;
@@ -935,7 +935,7 @@ describe('#StateUpdaters', () => {
     it("sets form to deactive if there's no content", () => {
       const state = { comment: 'A' };
       const input = '';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.false;
