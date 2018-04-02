@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import {
-  collectionVote,
-  limitVote,
-  controlledCommentFormInput,
+  updateVoteStateForCollection,
+  localVoteStateValidator,
+  updateControlledFormState,
   removeCommentFromState
 } from '../stateUpdaters';
 
 describe('#StateUpdaters', () => {
-  describe('#collectionVote', () => {
+  describe('#updateVoteStateForCollection', () => {
     it('does not mutate state', () => {
       const originalArticles = [
         {
@@ -374,7 +374,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticles, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticles);
     });
@@ -390,7 +390,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticle, articleId, voteType);
 
       expect(actual.votes).to.equal(originalArticle.votes + 1);
     });
@@ -406,7 +406,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticle, articleId, voteType);
 
       expect(actual.votes).to.equal(originalArticle.votes - 1);
     });
@@ -422,7 +422,7 @@ describe('#StateUpdaters', () => {
       };
       const articleId = originalArticle._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticle, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticle, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticle.votes - 1);
     });
@@ -491,7 +491,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticles, articleId, voteType);
 
       expect(actual[0].votes).to.equal(originalArticles[0].votes + 1);
     });
@@ -560,7 +560,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[originalArticles.length - 1]._id;
       const voteType = 'down';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticles, articleId, voteType);
 
       expect(actual[actual.length - 1].votes).to.equal(
         originalArticles[originalArticles.length - 1].votes - 1
@@ -621,7 +621,7 @@ describe('#StateUpdaters', () => {
       ];
       const commentId = originalComments[0]._id;
       const voteType = 'up';
-      const actual = collectionVote(originalComments, commentId, voteType);
+      const actual = updateVoteStateForCollection(originalComments, commentId, voteType);
 
       expect(actual[0].votes).to.equal(originalComments[0].votes + 1);
     });
@@ -680,7 +680,7 @@ describe('#StateUpdaters', () => {
       ];
       const commentId = originalComments[4]._id;
       const voteType = 'down';
-      const actual = collectionVote(originalComments, commentId, voteType);
+      const actual = updateVoteStateForCollection(originalComments, commentId, voteType);
 
       expect(actual[4].votes).to.equal(originalComments[4].votes - 1);
     });
@@ -749,7 +749,7 @@ describe('#StateUpdaters', () => {
       ];
       const articleId = originalArticles[originalArticles.length - 1]._id;
       const voteType = 'why';
-      const actual = collectionVote(originalArticles, articleId, voteType);
+      const actual = updateVoteStateForCollection(originalArticles, articleId, voteType);
 
       expect(actual).to.not.equal(originalArticles);
       expect(actual[originalArticles.length - 1].votes).to.equal(
@@ -757,7 +757,7 @@ describe('#StateUpdaters', () => {
       );
     });
   });
-  describe('#limitVote', () => {
+  describe('#localVoteStateValidator', () => {
     it('increments vote and blocks voting up again', () => {
       const originalState = {
         voteChangedBy: 0,
@@ -765,7 +765,7 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       const voteType = 'up';
-      const actual = limitVote(originalState, voteType);
+      const actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
@@ -778,7 +778,7 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       const voteType = 'down';
-      const actual = limitVote(originalState, voteType);
+      const actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
@@ -791,7 +791,7 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       const voteType = 'up';
-      const actual = limitVote(originalState, voteType);
+      const actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
@@ -805,13 +805,13 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       const voteType = 'down';
-      let actual = limitVote(originalState, voteType);
+      let actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
@@ -823,13 +823,13 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       const voteType = 'up';
-      let actual = limitVote(originalState, voteType);
+      let actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
@@ -841,24 +841,24 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       let voteType = 'up';
-      let actual = limitVote(originalState, voteType);
+      let actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
 
       voteType = 'down';
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(0);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(false);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
@@ -870,48 +870,48 @@ describe('#StateUpdaters', () => {
         voteDownDisabled: false
       };
       let voteType = 'down';
-      let actual = limitVote(originalState, voteType);
+      let actual = localVoteStateValidator(originalState, voteType);
 
       expect(actual.voteChangedBy).to.equal(-1);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(true);
 
       voteType = 'up';
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(0);
       expect(actual.voteUpDisabled).to.equal(false);
       expect(actual.voteDownDisabled).to.equal(false);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
 
-      actual = limitVote(actual, voteType);
+      actual = localVoteStateValidator(actual, voteType);
       expect(actual.voteChangedBy).to.equal(1);
       expect(actual.voteUpDisabled).to.equal(true);
       expect(actual.voteDownDisabled).to.equal(false);
     });
   });
-  describe('#controlledCommentFormInput', () => {
+  describe('#updateControlledFormState', () => {
     it('Returns new version of state with new input', () => {
       let state = { comment: '' };
       let input = 'A';
-      let actual = controlledCommentFormInput(state, input);
+      let actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'A' };
       input = 'Aa';
-      actual = controlledCommentFormInput(state, input);
+      actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
 
       state = { comment: 'Aa' };
       input = 'Aa1';
-      actual = controlledCommentFormInput(state, input);
+      actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.comment).to.equal(input);
@@ -919,7 +919,7 @@ describe('#StateUpdaters', () => {
     it('returns original state if passed same content', () => {
       const state = { comment: 'A' };
       const input = 'A';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.equal(state);
       expect(actual.comment).to.equal(state.comment);
@@ -927,7 +927,7 @@ describe('#StateUpdaters', () => {
     it("sets form to active if there's content", () => {
       const state = { comment: '' };
       const input = 'A';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.true;
@@ -935,7 +935,7 @@ describe('#StateUpdaters', () => {
     it("sets form to deactive if there's no content", () => {
       const state = { comment: 'A' };
       const input = '';
-      const actual = controlledCommentFormInput(state, input);
+      const actual = updateControlledFormState(state, input);
 
       expect(actual).to.not.equal(state);
       expect(actual.formActive).to.be.false;

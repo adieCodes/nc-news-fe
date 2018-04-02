@@ -10,7 +10,7 @@ import {
 } from '../api';
 import ArticlePage from '../components/ArticlePage';
 import Loading from '../components/Loading';
-import { collectionVote, removeCommentFromState } from '../stateUpdaters';
+import { updateVoteStateForCollection, removeCommentFromState } from '../stateUpdaters';
 
 class ArticlePageContainer extends Component {
   state = { article: {}, comments: [], articleLoading: true, commentsLoading: true };
@@ -27,7 +27,7 @@ class ArticlePageContainer extends Component {
 
   handleVote = (collection, id, voteType) => {
     const subState = this.state[collection];
-    const newArticles = collectionVote(subState, id, voteType);
+    const newArticles = updateVoteStateForCollection(subState, id, voteType);
 
     this.setState({ [collection]: newArticles });
     if (collection === 'article') return updateArticleVote(id, voteType);

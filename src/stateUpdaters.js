@@ -1,4 +1,4 @@
-const collectionVote = (collection, id, voteType) => {
+const updateVoteStateForCollection = (collection, id, voteType) => {
   if (!/^down$|^up$/.test(voteType)) return collection.slice(0);
   const voteValue = voteType === 'up' ? 1 : -1;
 
@@ -16,17 +16,18 @@ const collectionVote = (collection, id, voteType) => {
   });
 };
 
-const limitVote = (state, voteType) => {
+const localVoteStateValidator = (state, voteType) => {
   const newVoteValue = voteType === 'up' ? 1 : -1;
+  const voteTypePropNameInState = `vote${voteType[0].toUpperCase()}${voteType
+    .slice(1)
+    .toLowerCase()}Disabled`;
+  const voteTypeBlocked = state[voteTypePropNameInState];
+
+  if (voteTypeBlocked) return state;
+
   const newVoteCount = state.voteChangedBy + newVoteValue;
   const blockVotingUp = newVoteCount > 0;
   const blockVotingDown = newVoteCount < 0;
-
-  const currentVoteDisablingString = `vote${voteType[0].toUpperCase()}${voteType
-    .slice(1)
-    .toLowerCase()}Disabled`;
-
-  if (state[currentVoteDisablingString]) return state;
 
   return Object.assign({}, state, {
     voteChangedBy: newVoteCount,
@@ -35,7 +36,7 @@ const limitVote = (state, voteType) => {
   });
 };
 
-const controlledCommentFormInput = (state, input) => {
+const updateControlledFormState = (state, input) => {
   if (input === state.comment) return state;
   const isThereContent = input.length > 0;
 
@@ -45,4 +46,9 @@ const controlledCommentFormInput = (state, input) => {
 const removeCommentFromState = (commentState, commentId) =>
   commentState.filter(comment => comment._id !== commentId);
 
-export { collectionVote, limitVote, controlledCommentFormInput, removeCommentFromState };
+export {
+  updateVoteStateForCollection,
+  localVoteStateValidator,
+  updateControlledFormState,
+  removeCommentFromState
+};
