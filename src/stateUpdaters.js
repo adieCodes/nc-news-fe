@@ -18,15 +18,16 @@ const updateVoteState = (collection, id, voteType) => {
 
 const limitVote = (state, voteType) => {
   const newVoteValue = voteType === 'up' ? 1 : -1;
+  const voteTypePropNameInState = `vote${voteType[0].toUpperCase()}${voteType
+    .slice(1)
+    .toLowerCase()}Disabled`;
+  const voteTypeBlocked = state[voteTypePropNameInState];
+
+  if (voteTypeBlocked) return state;
+
   const newVoteCount = state.voteChangedBy + newVoteValue;
   const blockVotingUp = newVoteCount > 0;
   const blockVotingDown = newVoteCount < 0;
-
-  const currentVoteDisablingString = `vote${voteType[0].toUpperCase()}${voteType
-    .slice(1)
-    .toLowerCase()}Disabled`;
-
-  if (state[currentVoteDisablingString]) return state;
 
   return Object.assign({}, state, {
     voteChangedBy: newVoteCount,
