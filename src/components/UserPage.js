@@ -1,8 +1,9 @@
 import React from 'react';
 import PT from 'prop-types';
+import ArticleList from '../components/ArticleList';
 
 const UserPage = props => (
-  <div className="userPage container column is-two-thirds">
+  <div className="userPage container">
     <div className="card">
       <div className="card-content">
         <div className="media">
@@ -16,6 +17,7 @@ const UserPage = props => (
         </div>
       </div>
     </div>
+    <ArticleList articles={props.userArticles} votingActive={false} />;
   </div>
 );
 
