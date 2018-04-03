@@ -5,14 +5,10 @@ body {
 a {
   transition: all 0.4s ease-in-out;
   color: #363636;
-  text-decoration: underline;
-  text-decoration-color: #ddd;
+  text-decoration: none;
 }
 a:hover {
   text-decoration-color: #484349;
-}
-.navbar.is-white {
-  background: #f0f2f4;
 }
 .card {
   box-shadow: unset;
