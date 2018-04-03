@@ -10,7 +10,7 @@ This application is built using React and consumes the data provided by my [back
 
 I have followed TDD (Test Driven Development) best practises when building this application. If you would like to see the tests in action or run the application locally instructions to do so are below.
 
-TODO: A deployed version of this will be linked here.
+If you would prefer you can view a deployed version [here](https://github.com/adieCodes/nc-news-fe).
 
 ### Prerequisites
 
