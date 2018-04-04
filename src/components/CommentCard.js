@@ -50,7 +50,7 @@ class CommentCard extends Component {
               <VoteButton vote={this.vote} voteType="up" activeState={this.state.voteUpDisabled} />
             </div>
             <div className="card-footer-item">
-              <span aria-label="vote count">{this.props.comment.votes}</span>
+              <span aria-label="vote count">{this.props.comment.votes} votes</span>
             </div>
             <div className="card-footer-item">
               <VoteButton
