@@ -29,7 +29,7 @@ class ArticleCard extends Component {
 
     return (
       <div className="article column is-half">
-        <div className="container card">
+        <div className={`container card ${this.props.article.belongs_to}`}>
           <div className="card-content">
             <div className="media">
               <div className="media-center">
@@ -58,7 +58,7 @@ class ArticleCard extends Component {
               </div>
             )}
             <div className="card-footer-item">
-              <span aria-label="vote count">{voteCount}</span>
+              <span aria-label="vote count">{voteCount} votes</span>
             </div>
             {this.props.votingActive && (
               <div className="card-footer-item">

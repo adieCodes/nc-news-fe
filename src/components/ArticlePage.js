@@ -31,7 +31,7 @@ class ArticlePage extends Component {
     return (
       <div className="articlePage container column is-two-thirds">
         <article className="article">
-          <div className="container card">
+          <div className={`container card ${this.props.article.belongs_to}`}>
             <div className="card-content">
               <div className="media">
                 <div className="media-center">
@@ -59,7 +59,7 @@ class ArticlePage extends Component {
                 />
               </div>
               <div className="card-footer-item">
-                <span>{this.props.article.votes}</span>
+                <span>{this.props.article.votes} votes</span>
               </div>
               <div className="card-footer-item">
                 <VoteButton
