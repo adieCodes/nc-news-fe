@@ -29,7 +29,7 @@ class ArticleCard extends Component {
 
     return (
       <div className="article column is-half">
-        <div className="container card">
+        <div className={`container card ${this.props.article.belongs_to}`}>
           <div className="card-content">
             <div className="media">
               <div className="media-center">
