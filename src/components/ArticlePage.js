@@ -59,7 +59,7 @@ class ArticlePage extends Component {
                 />
               </div>
               <div className="card-footer-item">
-                <span>{this.props.article.votes}</span>
+                <span>{this.props.article.votes} votes</span>
               </div>
               <div className="card-footer-item">
                 <VoteButton

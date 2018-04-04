@@ -58,7 +58,7 @@ class ArticleCard extends Component {
               </div>
             )}
             <div className="card-footer-item">
-              <span aria-label="vote count">{voteCount}</span>
+              <span aria-label="vote count">{voteCount} votes</span>
             </div>
             {this.props.votingActive && (
               <div className="card-footer-item">
