@@ -10,8 +10,49 @@ a {
 a:hover {
   text-decoration-color: #484349;
 }
+.navbar-brand {
+  transition: all 1s ease-in-out;
+  border-top: 2px solid #c7cedb;
+}
+.navbar-menu .navbar-item:first-child {
+  transition: all 1s ease-in-out;
+  border-top: 2px solid #f46036;
+}
+.navbar-menu .navbar-item:nth-child(2) {
+  transition: all 1s ease-in-out;
+  border-top: 2px solid #5b85aa;
+}
+.navbar-menu .navbar-item:nth-child(3) {
+  transition: all 1s ease-in-out;
+  border-top: 2px solid #7e9181;
+}
+.navbar-brand a.navbar-item:hover {
+  color: white;
+  background-color: rgba(199, 206, 219, 1);
+}
+.navbar-menu a.navbar-item:first-child:hover {
+  color: white;
+  background-color: rgba(244, 96, 54, 0.5);
+}
+.navbar-menu a.navbar-item:nth-child(2):hover {
+  background-color: rgba(91, 133, 170, 0.5);
+  color: white;
+}
+.navbar-menu a.navbar-item:nth-child(3):hover {
+  background-color: rgba(126, 145, 129, 0.5);
+  color: white;
+}
 .card {
   box-shadow: unset;
+}
+.card.coding {
+  border-top: 4px solid #f46036;
+}
+.card.cooking {
+  border-top: 4px solid #5b85aa;
+}
+.card.football {
+  border-top: 4px solid #7e9181;
 }
 .card-footer {
   border: none;
